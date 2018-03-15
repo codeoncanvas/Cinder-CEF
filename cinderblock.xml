@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cinder>
+<block
+    name="Cinder-CEF"
+    id=""
+    author="Code On Canvas"
+    summary="Webviews in Cinder using Chrome Embedded Framework"
+    license=""
+    url=""
+    git="git@github.com:codeoncanvas/cinder-cef.git"
+    version=""
+    library="https://bitbucket.org/chromiumembedded/cef"
+    >
+
+    <includePath>lib/cef</includePath>
+    <includePath>lib/cef/include</includePath>
+    <includePath system="true">lib/cef/include</includePath>
+
+    <headerPattern>lib/cef/include/*.h</headerPattern>
+    <headerPattern>lib/cef/include/base/*.h</headerPattern>
+    <headerPattern>lib/cef/include/capi/*.h</headerPattern>
+    <headerPattern>lib/cef/include/capi/test/*.h</headerPattern>
+    <headerPattern>lib/cef/include/capi/views/*.h</headerPattern>
+    <headerPattern>lib/cef/include/internal/*.h</headerPattern>
+    <headerPattern>lib/cef/include/test/*.h</headerPattern>
+    <headerPattern>lib/cef/include/wrapper/*.h</headerPattern>
+
+    <platform os="msw">
+        <!-- not implemented -->
+    </platform>
+
+    <platform os="macosx">
+
+        <!--<header>src/cocCefWrapper.h</header>
+        <header>src/cocCefWrapper.cpp</header>
+        <header>src/browser_client.hpp</header>
+        <header>src/render_handler.hpp</header>
+        <header>src/process_helper_mac.cpp</header> --> <!-- added as a header to prevent adding it to build target -->
+
+        <!--
+        <platform config="debug">
+            <framework>lib/cef/Debug/Chromium Embedded Framework.framework</framework>
+            <staticLibrary>lib/cef/Debug/libcef_dll_wrapper.a</staticLibrary>
+        </platform>
+        -->
+
+        <!--<frameworkPath>lib/cef/Release</frameworkPath>
+        <framework>lib/cef/Release/Chromium Embedded Framework.framework</framework>
+        <staticLibrary>lib/cef/Release/libcef_dll_wrapper.a</staticLibrary>
+
+        <buildCopy destination="frameworks">lib/cef/Release/Chromium Embedded Framework.framework</buildCopy>
+        <setting name="LD_RUNPATH_SEARCH_PATHS">$(inherited) @executable_path/../Frameworks</setting>-->
+
+
+    </platform>
+
+</block>
+</cinder>
