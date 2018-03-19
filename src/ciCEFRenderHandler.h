@@ -21,6 +21,11 @@ class ciCEFRenderHandler : public CefRenderHandler
 public:
     
     ciCEFRenderHandler(int width, int height) : mWidth{width}, mHeight{height} {
+        const size_t bufferSize = mWidth * mHeight * 4;
+        mBuffer = std::unique_ptr<uint8_t>{new uint8_t[bufferSize]};
+        memset(mBuffer.get(), 0, bufferSize);
+        mTex = ci::gl::Texture::create(mBuffer.get(), GL_BGRA, mWidth, mHeight);
+        mTex->setTopDown();  // specified to flip pixels vertically
     }
 
     bool initialized;
@@ -49,6 +54,7 @@ public:
     void ClearPopupRects();
     void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show) OVERRIDE;
     void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) OVERRIDE;
+    ci::gl::TextureRef getTexture();
     
     
   //private:

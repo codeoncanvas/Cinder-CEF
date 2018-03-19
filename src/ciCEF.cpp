@@ -89,13 +89,13 @@ namespace coc {
     
     // This could be used on windows, could improve performance
     // If you enable this, 'CefDoMessageLoopWork()' should not be called
-    //cefSettings.multi_threaded_message_loop = true;
+    // cefSettings.multi_threaded_message_loop = true;
     
     // Implement external message pump?! see 'main_message_loop_external_pump' in 'ceftest/shared/browser'
     //cefSettings.external_message_pump = true;
     
     // Default is LOGSEVERITY_INFO
-    //cefSettings.log_severity = LOGSEVERITY_VERBOSE;
+    cefSettings.log_severity = LOGSEVERITY_VERBOSE;
     
     
     // Initialize CEF
@@ -103,6 +103,8 @@ namespace coc {
     if (not didInitialize) { throw std::runtime_error{"CEF process execution failed"}; }
     
     }
+    
+    
     
     ciCEF::~ciCEF() {
         
@@ -167,6 +169,7 @@ namespace coc {
     void ciCEF::update() {
         // Single iteration of message loop, does not block
         CefDoMessageLoopWork();
+       
     }
     
     void ciCEF::onLoadStart() {
@@ -195,13 +198,20 @@ namespace coc {
     
     void ciCEF::draw( ci::vec2  pos ) {
     
-//        if (!isReady()) { return; }
-//
-//        gl::TextureRef tex = getTexture();
-//        if (tex) gl::draw( tex );
-//
-//        // TODO implement cursor changes, see CefRenderHandler::OnCursorChange
+        if (!mV8ContextCreated) return; 
+
+        gl::TextureRef tex = getTexture();
+        if (tex) gl::draw( tex );
+
+        // TODO implement cursor changes, see CefRenderHandler::OnCursorChange
     }
+    
+    ci::gl::TextureRef ciCEF::getTexture()
+    {
+        return mRenderHandler->getTexture();
+    }
+    
+    
     
     
 }

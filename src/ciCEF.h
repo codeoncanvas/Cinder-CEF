@@ -19,6 +19,7 @@
 namespace coc {
     
     void initCiCEF(int argc, char **argv);
+    void updateCEF();
     
     class ciCEF {
         
@@ -39,7 +40,9 @@ namespace coc {
         void onLoadEnd(int httpStatusCode);
         
         void bindCallFromJS(CefRefPtr<CefListValue> args);
-        bool V8ContextCreated = false; // Don't set this
+      
+        bool mV8ContextCreated = false; // Don't set this
+        bool isReady() const { return mV8ContextCreated; }
 
         
 //        void keyDown( ci::app::KeyEvent event );

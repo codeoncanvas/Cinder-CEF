@@ -296,7 +296,18 @@ void ciCEFRenderHandler::render() {
 }
  */
 
+void ciCEFRenderHandler::OnPaint(CefRefPtr<CefBrowser> browser,
+             PaintElementType type, const RectList &dirtyRects, const void *buffer,
+             int width, int height) {
+    
+    std::cout << "onPaint \t" << mWidth << ", " << mHeight << std::endl;
+    mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, width, height);
+}
+
+ci::gl::TextureRef ciCEFRenderHandler::getTexture() { return mTex; }
+
 //--------------------------------------------------------------
+/*
 void ciCEFRenderHandler::OnPaint(CefRefPtr<CefBrowser> browser,
                                   PaintElementType type,
                                   const RectList &dirtyRects,
@@ -397,3 +408,4 @@ void ciCEFRenderHandler::OnPaint(CefRefPtr<CefBrowser> browser,
         glDisable(GL_BLEND); VERIFY_NO_ERROR;
     }
 }
+ */

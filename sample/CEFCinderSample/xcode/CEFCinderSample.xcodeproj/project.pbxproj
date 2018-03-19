@@ -317,7 +317,7 @@
 		C5A61C23205F5C8900DED73D /* ciCEFBrowserClient.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ciCEFBrowserClient.cpp; path = ../../../src/ciCEFBrowserClient.cpp; sourceTree = "<group>"; };
 		C5A61C24205F5C8900DED73D /* ciCEFBrowserClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ciCEFBrowserClient.h; path = ../../../src/ciCEFBrowserClient.h; sourceTree = "<group>"; };
 		C5A61C26205F5CD500DED73D /* ciCEFRenderHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ciCEFRenderHandler.h; path = ../../../src/ciCEFRenderHandler.h; sourceTree = "<group>"; };
-		C5A61C27205F5CD500DED73D /* ciCEFRenderHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ciCEFRenderHandler.cpp; path = ../../../src/ciCEFRenderHandler.cpp; sourceTree = "<group>"; };
+		C5A61C27205F5CD500DED73D /* ciCEFRenderHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ciCEFRenderHandler.cpp; path = ../../../src/ciCEFRenderHandler.cpp; sourceTree = "<group>"; };
 		D84CF1BDB0E14CE9B9CEB24B /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

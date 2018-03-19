@@ -52,10 +52,10 @@ bool ciCEFBrowserClient::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
         return true;
     }
     else if (name == "OnV8ContextCreated") {
-        _parent->V8ContextCreated = true;
+        _parent->mV8ContextCreated = true;
     }
     else if (name == "OnV8ContextReleased") {
-        _parent->V8ContextCreated = false;
+        _parent->mV8ContextCreated = false;
     }
 
     return true;
