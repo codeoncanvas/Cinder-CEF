@@ -40,7 +40,8 @@ namespace coc {
         void onLoadStart();
         void onLoadEnd(int httpStatusCode);
         
-        void bindCallFromJS(CefRefPtr<CefListValue> args);
+//		void executeJS(const string& command);
+       void bindCallFromJS(CefRefPtr<CefListValue> args);
       
         bool mV8ContextCreated = false; // Don't set this
         bool isReady() const { return mV8ContextCreated; }

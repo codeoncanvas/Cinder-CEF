@@ -179,10 +179,19 @@ namespace coc {
     void ciCEF::update() {
         // Single iteration of message loop, does not block
         CefDoMessageLoopWork();
-        cout << "update" << endl;
-       
+     
     }
     
+	//--------------------------------------------------------------
+	//void ciCEF::executeJS(const string& command) {
+
+	//	if (!browser()) { return; }
+
+	//	CefRefPtr<CefFrame> frame = browser()->GetMainFrame();
+	//	frame->ExecuteJavaScript(command, frame->GetURL(), 0);
+
+	//}
+
     void ciCEF::onLoadStart() {
         
     }

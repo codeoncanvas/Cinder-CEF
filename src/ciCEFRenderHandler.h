@@ -46,13 +46,26 @@ public:
 		PaintElementType type, const RectList &dirtyRects, const void *buffer,
 		int width, int height) override {
 
-		std::cout << "onPaint \t" << mWidth << ", " << mHeight << std::endl;
+//		std::cout << "onPaint \t" << mWidth << ", " << mHeight << std::endl;
 
-		memcpy(mSurface->getData(), buffer, 640 * 480 * 4);
+		memcpy(mSurface->getData(), buffer, mWidth * mHeight * 4);
 		// create a surface
-		ci::Surface newSurface(320, 240, true, ci::SurfaceChannelOrder::BGRA);
+		/*ci::Surface newSurface(320, 240, true, ci::SurfaceChannelOrder::BGRA);
 		newSurface.copyFrom(*mSurface, ci::Area(100, 100, 420, 340), ci::vec2(-100, -100));
-		mTex->update(newSurface, 0, ci::vec2(100, 100));
+		mTex->update(newSurface, 0, ci::vec2(100, 100));*/
+
+
+		CefRenderHandler::RectList::const_iterator i = dirtyRects.begin();
+		
+		for (; i != dirtyRects.end(); ++i) {
+			const CefRect& rect = *i;
+			ci::Surface newSurface(rect.width, rect.height, true, ci::SurfaceChannelOrder::BGRA);
+			newSurface.copyFrom(*mSurface, ci::Area(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height ), ci::vec2(-1 * rect.x, -1 * rect.y));
+			mTex->update(newSurface, 0, ci::vec2(rect.x, rect.y));
+		}
+
+
+
 		//mTex->update(newSurface, GL_BGRA, GL_UNSIGNED_BYTE, 0, 639, 480, ci::vec2(1,0));
 
 		////--------------------------------------------------------------
