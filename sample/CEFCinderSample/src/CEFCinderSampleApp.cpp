@@ -18,7 +18,7 @@ public:
 };
 
 void CEFCinderSampleApp::setup() {
-    mWebViewWrapper.setup("https://davetowey.com", getWindowSize());
+    mWebViewWrapper.setup("http://codeoncanvas.cc", getWindowSize());
     mWebViewWrapper.registerEvents();
 }
 
@@ -29,13 +29,12 @@ void CEFCinderSampleApp::update() {
 }
 
 void CEFCinderSampleApp::draw() {
-    gl::clear(Color{0, 1, 0});
-
+    gl::clear(Color{0, 0, 0});
     mWebViewWrapper.draw();
 }
 
 void prepareSettings(App::Settings *settings) {
-    char *argv[] = {};
+    char *argv[5] = {};
     coc::initCiCEF(0, argv);
 }
 

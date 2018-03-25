@@ -1,4 +1,4 @@
-#define TARGET_OSX CINDER_COCOA
+//#define TARGET_OSX CINDER_COCOA
 #define TARGET_WIN32 CINDER_MSW
 
 //#include "cinder/Log.h"
@@ -10,7 +10,7 @@
 
 #include <cef_app.h>
 #include "cinder/Log.h"
-#include "cinderCEFRenderHandler.h"
+#include "ciCEFRenderHandler.h"
 #include "ciCEF.h"
 
 namespace coc {
@@ -52,7 +52,7 @@ namespace coc {
         CI_LOG_I("Process type: " << process_type);
         
         if (process_type == kRendererProcess) {
-            app = new CinderCEFClientApp();
+            app = new ciCEFClientApp();
             
             //#if defined(OS_LINUX)
             //        } else if (process_type == kZygoteProcess) {
@@ -125,7 +125,7 @@ namespace coc {
         windowInfo.SetAsWindowless(view);
         
 #elif defined(TARGET_WIN32)
-        HWND hWnd = ofGetWin32Window();
+		HWND hWnd = (HWND)ci::app::getWindow()->getNative();
         windowInfo.SetAsWindowless(hWnd);
 #endif
         
@@ -169,6 +169,7 @@ namespace coc {
     void ciCEF::update() {
         // Single iteration of message loop, does not block
         CefDoMessageLoopWork();
+        cout << "update" << endl;
        
     }
     
@@ -181,13 +182,162 @@ namespace coc {
     }
     
     void ciCEF::registerEvents() {
-//        getWindow()->getSignalKeyDown().connect( signals::slot( this, &CinderCEF::keyDown) );
-//        getWindow()->getSignalKeyUp().connect( signals::slot( this, &CinderCEF::keyUp) );
-//        getWindow()->getSignalMouseDown().connect( signals::slot( this, &CinderCEF::mouseDown) );
-//        getWindow()->getSignalMouseUp().connect( signals::slot( this, &CinderCEF::mouseUp) );
-//        getWindow()->getSignalMouseWheel().connect( signals::slot( this, &CinderCEF::mouseWheel) );
-//        getWindow()->getSignalMouseMove().connect( signals::slot( this, &CinderCEF::mouseMove) );
-//        getWindow()->getSignalMouseDrag().connect( signals::slot( this, &CinderCEF::mouseDrag) );
+        getWindow()->getSignalKeyDown().connect( signals::slot( this, &ciCEF::keyDown) );
+        getWindow()->getSignalKeyUp().connect( signals::slot( this, &ciCEF::keyUp) );
+        getWindow()->getSignalMouseDown().connect( signals::slot( this, &ciCEF::mouseDown) );
+        getWindow()->getSignalMouseUp().connect( signals::slot( this, &ciCEF::mouseUp) );
+        getWindow()->getSignalMouseWheel().connect( signals::slot( this, &ciCEF::mouseWheel) );
+        getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
+        getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
+    }
+    
+    void ciCEF::enableResize(){
+        //ofAddListener(ofEvents().windowResized, this, &ofxCEF::windowResized);
+        getWindow()->getSignalResize().connect( signals::slot( this, &ciCEF::windowResized) );
+    }
+    
+    void ciCEF::reshape( ci::ivec2 size ) {
+        //TODO this doesn't work fully
+        
+        //mRenderHandler->reshape(size.x,size.y);
+        
+        // Check host is available
+        if (browser() == nullptr) { return; }
+        const auto browserHost = browser()->GetHost();
+        if (browserHost == nullptr) { return; }
+        
+        browserHost->WasResized();
+    }
+    
+    void ciCEF::keyDown( KeyEvent event ) {
+        
+        // Check host is available
+        if (browser() == nullptr) { return; }
+        const auto browserHost = browser()->GetHost();
+        if (browserHost == nullptr) { return; }
+        
+        CefKeyEvent cefKeyEvent;
+        
+        // hack inherited from ofxCEF
+        // https://github.com/ofZach/ofxCef/blame/master/src/ofxCEF.cpp#L425
+        if (std::any_of(mNonCharKeys.cbegin(), mNonCharKeys.cend(),
+                        [&event](int k){ return k == event.getCode(); })) {
+            cefKeyEvent.type = KEYEVENT_KEYDOWN;
+            
+        } else {
+            cefKeyEvent.type = KEYEVENT_CHAR;
+            cefKeyEvent.character = event.getChar();
+        }
+        
+        cefKeyEvent.native_key_code = event.getNativeKeyCode();
+        browserHost->SendKeyEvent(cefKeyEvent);
+    }
+    
+    void ciCEF::keyUp( KeyEvent event ) {
+        
+        // Check host is available
+        if (browser() == nullptr) { return; }
+        const auto browserHost = browser()->GetHost();
+        if (browserHost == nullptr) { return; }
+        
+        CefKeyEvent cefKeyEvent;
+        
+        if (std::any_of(mNonCharKeys.cbegin(), mNonCharKeys.cend(),
+                        [&event](int key){ return key == event.getCode(); })) {
+            cefKeyEvent.type = KEYEVENT_CHAR;
+            cefKeyEvent.character = event.getChar();
+            
+        } else {
+            cefKeyEvent.type = KEYEVENT_KEYUP;
+        }
+        
+        cefKeyEvent.native_key_code = event.getNativeKeyCode();
+        browserHost->SendKeyEvent(cefKeyEvent);
+    }
+    
+    void ciCEF::mouseDown( MouseEvent event ) {
+        
+        const auto browserHost = browser()->GetHost();
+        if (browserHost == nullptr) { return; }
+        
+        const auto mouseButtonType =
+        event.isLeft() ? MBT_LEFT :
+        //event.isRight() ? MBT_RIGHT :  // causes crash, so treat as middle
+        //TODO can use EVENTFLAG_LEFT_MOUSE_BUTTON
+        MBT_MIDDLE;
+        
+        CefMouseEvent cefMouseEvent;
+        cefMouseEvent.x = event.getX();
+        cefMouseEvent.y = event.getY();
+        cefMouseEvent.modifiers = event.getNativeModifiers();
+        
+        browser()->GetHost()->SendMouseClickEvent(cefMouseEvent, mouseButtonType, false, 1);
+    }
+    
+    void ciCEF::windowResized(){
+        if (!fixedSize) {
+            width_ = getWindowWidth();
+            height_ = getWindowHeight();
+            reshape(vec2{width_, height_});
+            //mRenderHandler->init();  // not implemented
+        }
+        //cefgui->browser->Reload();
+    }
+    
+    void ciCEF::mouseUp( MouseEvent event ) {
+        
+        // Check host is available
+        if (browser() == nullptr) { return; }
+        const auto browserHost = browser()->GetHost();
+        if (browserHost == nullptr) { return; }
+        
+        const auto mouseButtonType =
+        event.isLeft() ? MBT_LEFT :
+        //event.isRight() ? MBT_RIGHT :  // causes crash, so treat as middle
+        MBT_MIDDLE;
+        
+        CefMouseEvent cefMouseEvent;
+        cefMouseEvent.x = event.getX();
+        cefMouseEvent.y = event.getY();
+        cefMouseEvent.modifiers = event.getNativeModifiers();
+        
+        browser()->GetHost()->SendMouseClickEvent(cefMouseEvent, mouseButtonType, true, 1);
+    }
+    
+    void ciCEF::mouseWheel( MouseEvent event ) {
+        
+        // Check host is available
+        if (browser() == nullptr) { return; }
+        const auto browserHost = browser()->GetHost();
+        if (browserHost == nullptr) { return; }
+        
+        const int deltaY = std::round(event.getWheelIncrement() * mScrollSensitivity);
+        
+        CefMouseEvent cefMouseEvent;
+        cefMouseEvent.x = event.getX();
+        cefMouseEvent.y = event.getY();
+        cefMouseEvent.modifiers = event.getNativeModifiers();
+        
+        browser()->GetHost()->SendMouseWheelEvent(cefMouseEvent, 0, deltaY);
+    }
+    
+    void ciCEF::mouseMove( MouseEvent event ) {
+        
+        // Check host is available
+        if (browser() == nullptr) { return; }
+        const auto browserHost = browser()->GetHost();
+        if (browserHost == nullptr) { return; }
+        
+        CefMouseEvent cefMouseEvent;
+        cefMouseEvent.x = event.getX();
+        cefMouseEvent.y = event.getY();
+        cefMouseEvent.modifiers = event.getNativeModifiers();
+        
+        browserHost->SendMouseMoveEvent(cefMouseEvent, false);
+    }
+    
+    void ciCEF::mouseDrag( MouseEvent event ) {
+        // not yet implemented, see ClientHandler::StartDragging if required
     }
     
     void ciCEF::bindCallFromJS(CefRefPtr<CefListValue> args) {

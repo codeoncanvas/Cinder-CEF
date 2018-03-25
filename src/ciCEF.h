@@ -6,13 +6,14 @@
 #include <iso646.h>     // alternative logical operator tokens
 
 //#include "include/cef_application_mac.h"
-//#include "include/wrapper/cef_helpers.h"
+#include "include/wrapper/cef_helpers.h"
 
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 
-#include "cef_helpers.h"
+//#include "cef_helpers.h"
+#include "ciCEFClientApp.h"
 #include "ciCEFBrowserClient.h"
 #include "ciCEFRenderHandler.h"
 
@@ -45,13 +46,13 @@ namespace coc {
         bool isReady() const { return mV8ContextCreated; }
 
         
-//        void keyDown( ci::app::KeyEvent event );
-//        void keyUp( ci::app::KeyEvent event );
-//        void mouseDown( ci::app::MouseEvent event );
-//        void mouseUp( ci::app::MouseEvent event );
-//        void mouseWheel( ci::app::MouseEvent event );
-//        void mouseMove( ci::app::MouseEvent event );
-//        void mouseDrag( ci::app::MouseEvent event );
+        void keyDown( ci::app::KeyEvent event );
+        void keyUp( ci::app::KeyEvent event );
+        void mouseDown( ci::app::MouseEvent event );
+        void mouseUp( ci::app::MouseEvent event );
+        void mouseWheel( ci::app::MouseEvent event );
+        void mouseMove( ci::app::MouseEvent event );
+        void mouseDrag( ci::app::MouseEvent event );
 
         bool fixedSize;
         float width_, height_;

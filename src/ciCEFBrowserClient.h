@@ -2,55 +2,52 @@
 #define BROWSER_CLIENT_H
 
 #include "cef_client.h"
-//#include "ciCEF.h"
+#include "ciCEF.h"
 
 #include "ciCEFRenderHandler.h"
 
 namespace coc {
-    class ciCEF;
+	class ciCEF;
 }
 
-//--------------------------------------------------------------
-class ciCEFBrowserClient : public CefClient, public CefLoadHandler, public CefLifeSpanHandler
-{
+class ciCEFBrowserClient : public CefClient,
+	public CefLoadHandler,
+	public CefLifeSpanHandler {
 public:
-    ciCEFBrowserClient(coc::ciCEF* parent, ciCEFRenderHandler* renderHandler);
+	ciCEFBrowserClient(
+		coc::ciCEF *mParent, ciCEFRenderHandler *renderHandler);
 
-    virtual CefRefPtr<CefRenderHandler> GetRenderHandler() OVERRIDE;
-    
-    virtual CefRefPtr<CefLoadHandler> GetLoadHandler() OVERRIDE;
-    
-    virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE;
+	virtual CefRefPtr<CefRenderHandler> GetRenderHandler() OVERRIDE;
 
-    bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
-                              CefProcessId source_process,
-                              CefRefPtr<CefProcessMessage> message) OVERRIDE;
-    
-    virtual void OnLoadStart(CefRefPtr<CefBrowser> browser,
-                             CefRefPtr<CefFrame> frame);
-    
+	virtual CefRefPtr<CefLoadHandler> GetLoadHandler() OVERRIDE;
 
-    virtual void OnLoadEnd(CefRefPtr<CefBrowser> browser,
-                           CefRefPtr<CefFrame> frame,
-                           int httpStatusCode) OVERRIDE;
-    
-    // CefLifeSpanHandler methods.
-    void OnAfterCreated(CefRefPtr<CefBrowser> browser) OVERRIDE;
-    void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
+	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE;
 
-    CefRefPtr<CefBrowser> GetBrowser() const { return m_Browser; }
-    
+	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
+		CefProcessId source_process,
+		CefRefPtr<CefProcessMessage> message) OVERRIDE;
+
+	virtual void OnLoadStart(
+		CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame);
+
+	virtual void OnLoadEnd(CefRefPtr<CefBrowser> browser,
+		CefRefPtr<CefFrame> frame, int httpStatusCode) OVERRIDE;
+
+	// CefLifeSpanHandler methods.
+	void OnAfterCreated(CefRefPtr<CefBrowser> browser) OVERRIDE;
+	void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
+
+	CefRefPtr<CefBrowser> GetBrowser() const { return mBrowser; }
+
 private:
-    CefRefPtr<CefRenderHandler> handler;
-    coc::ciCEF* _parent;
-    
-    CefRefPtr<CefBrowser> m_Browser;
-    int m_BrowserId;
-    int m_BrowserCount;
-    
-    
-    IMPLEMENT_REFCOUNTING(ciCEFBrowserClient);
+	CefRefPtr<CefRenderHandler> mHandler;
+	coc::ciCEF *mParent;
 
+	CefRefPtr<CefBrowser> mBrowser;
+	int mBrowserId;
+	int mBrowserCount;
+
+	IMPLEMENT_REFCOUNTING(ciCEFBrowserClient);
 };
 
 #endif
