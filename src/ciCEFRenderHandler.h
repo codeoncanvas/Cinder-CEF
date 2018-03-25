@@ -52,7 +52,7 @@ public:
 		// create a surface
 		ci::Surface newSurface(320, 240, true, ci::SurfaceChannelOrder::BGRA);
 		newSurface.copyFrom(*mSurface, ci::Area(100, 100, 420, 340), ci::vec2(-100, -100));
-		mTex->update(newSurface, 0, ci::vec2(0, 0));
+		mTex->update(newSurface, 0, ci::vec2(100, 100));
 		//mTex->update(newSurface, GL_BGRA, GL_UNSIGNED_BYTE, 0, 639, 480, ci::vec2(1,0));
 
 		////--------------------------------------------------------------

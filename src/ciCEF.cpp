@@ -109,6 +109,16 @@ namespace coc {
     ciCEF::~ciCEF() {
         
         //TODO: clean up
+		unregisterEvents();
+
+		// Shut down CEF.
+		if (browser()) {
+			browser()->GetHost()->CloseBrowser(true);
+		}
+
+		// The following call to CefShutdown make the app crash on OS X. Still not working on Windows neither.
+		// http://www.magpcss.org/ceforum/viewtopic.php?f=6&t=11441&p=24037&hilit=AutoreleasePoolPage#p24037
+		CefShutdown();
         
     }
     
@@ -190,6 +200,17 @@ namespace coc {
         getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
         getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
     }
+
+	void ciCEF::unregisterEvents() {
+		//TODO disconnect signals
+		//getWindow()->getSignalKeyDown().disconnect( signals::slot( this, &CinderCEF::keyDown) );
+		//getWindow()->getSignalKeyUp().disconnect( signals::slot( this, &CinderCEF::keyUp) );
+		//getWindow()->getSignalMouseDown().disconnect( signals::slot( this, &CinderCEF::mouseDown) );
+		//getWindow()->getSignalMouseUp().disconnect( signals::slot( this, &CinderCEF::mouseUp) );
+		//getWindow()->getSignalMouseWheel().disconnect( signals::slot( this, &CinderCEF::mouseWheel) );
+		//getWindow()->getSignalMouseMove().disconnect( signals::slot( this, &CinderCEF::mouseMove) );
+		//getWindow()->getSignalMouseDrag().disconnect( signals::slot( this, &CinderCEF::mouseDrag) );
+	}
     
     void ciCEF::enableResize(){
         //ofAddListener(ofEvents().windowResized, this, &ofxCEF::windowResized);
