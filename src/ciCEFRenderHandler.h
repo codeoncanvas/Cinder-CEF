@@ -48,15 +48,32 @@ public:
 
 //		std::cout << "onPaint \t" << mWidth << ", " << mHeight << std::endl;
 
-		memcpy(mSurface->getData(), buffer, mWidth * mHeight * 4);
+		//memcpy(mSurface->getData(), buffer, mWidth * mHeight * 4);
 
 		CefRenderHandler::RectList::const_iterator i = dirtyRects.begin();
 		
 		for (; i != dirtyRects.end(); ++i) {
 			const CefRect& rect = *i;
-			ci::Surface newSurface(rect.width, rect.height, true, ci::SurfaceChannelOrder::BGRA);
-			newSurface.copyFrom(*mSurface, ci::Area(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height ), ci::vec2(-1 * rect.x, -1 * rect.y));
-			mTex->update(newSurface.getData(), GL_RGBA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
+
+			uint8_t* img = (uint8_t*)buffer;
+			uint8_t* src = NULL;
+			uint8_t *newimage = new uint8_t[ rect.width * rect.height * 4];
+			uint8_t *dst = newimage;
+			short lineWidth = rect.width * 4; //Width of line to be copied
+
+			for (int y = rect.y; y < rect.y + rect.height; y++)
+			{
+				src = img + ((y)* width* 4);
+				for (int i = 0; i< lineWidth; i++, dst++, src++)
+				{
+					*dst = *src;
+				}
+			}
+
+//			ci::Surface newSurface(rect.width, rect.height, true, ci::SurfaceChannelOrder::BGRA);
+//			newSurface.copyFrom(*mSurface, ci::Area(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height ), ci::vec2(-1 * rect.x, -1 * rect.y));
+			mTex->update(newimage, GL_BGRA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
+			delete newimage;
 		}
 
 		//mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, mWidth, mHeight, ci::vec2(0,0));
