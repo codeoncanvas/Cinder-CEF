@@ -55,16 +55,16 @@ public:
 		for (; i != dirtyRects.end(); ++i) {
 			const CefRect& rect = *i;
 
-			uint8_t* img = (uint8_t*)buffer;
-			uint8_t* src = NULL;
-			uint8_t *newimage = new uint8_t[ rect.width * rect.height * 4];
+			uint8_t *img = (uint8_t*)buffer;
+			uint8_t *src = NULL;
+			uint8_t *newimage = new uint8_t[rect.width * rect.height * 4];
 			uint8_t *dst = newimage;
 			short lineWidth = rect.width * 4; //Width of line to be copied
 
 			for (int y = rect.y; y < rect.y + rect.height; y++)
 			{
-				src = img + ((y)* width* 4);
-				for (int i = 0; i< lineWidth; i++, dst++, src++)
+				src = img +  (y * width * 4);
+				for (int i = 0; i < lineWidth; i++, dst++, src++)
 				{
 					*dst = *src;
 				}
