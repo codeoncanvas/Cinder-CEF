@@ -15,14 +15,18 @@ public:
     void draw() override;
 
     coc::ciCEF mWebViewWrapper;
+	ci::Font mFont;
 
 private:
 	//void gotMessageFromJS(const ofxCEFJSMessageArgs& msg);
 };
 
 void CEFCinderSampleApp::setup() {
-    mWebViewWrapper.setup("https://davetowey.com", getWindowSize());
-    mWebViewWrapper.registerEvents();
+
+    mFont = Font("Arial", 18.0f);
+
+   mWebViewWrapper.setup("http://fabrica.it", getWindowSize());
+   mWebViewWrapper.registerEvents();
 }
 
 void CEFCinderSampleApp::mouseDown(MouseEvent event) {
@@ -75,10 +79,11 @@ void CEFCinderSampleApp::gotMessageFromJS(const ofxCEFJSMessageArgs& msg) {
 void CEFCinderSampleApp::draw() {
     gl::clear(Color{0, 0, 0});
     mWebViewWrapper.draw();
+	gl::drawString("FPS: " + std::to_string(getAverageFps()), ci::vec2(10.0f, 10.0f), Color::white(), mFont);
 }
 
 void prepareSettings(App::Settings *settings) {
-	settings->setWindowSize(1920, 1080);
+	settings->setWindowSize(1920*2, 1080*2);
     char *argv[5] = {};
     coc::initCiCEF(0, argv);
 }

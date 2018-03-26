@@ -61,7 +61,9 @@ public:
 			const CefRect& rect = *i;
 			ci::Surface newSurface(rect.width, rect.height, true, ci::SurfaceChannelOrder::BGRA);
 			newSurface.copyFrom(*mSurface, ci::Area(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height ), ci::vec2(-1 * rect.x, -1 * rect.y));
-			mTex->update(newSurface, 0, ci::vec2(rect.x, rect.y));
+			//newSurface.setChannelOrder(ci::SurfaceChannelOrder::RGBA);
+			//mTex->update(newSurface, 0, ci::vec2(rect.x, rect.y));
+			mTex->update(newSurface.getData(), GL_RGBA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
 		}
 
 

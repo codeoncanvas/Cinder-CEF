@@ -20,6 +20,9 @@ namespace coc {
     using namespace std;
 
     void initCiCEF(int argc, char **argv) {
+
+		std::cout << "initCiCEF" << endl;
+		
     
     #if defined(TARGET_OSX)
         CefMainArgs mainArgs(argc, argv);
@@ -41,6 +44,7 @@ namespace coc {
     command_line->InitFromString(::GetCommandLineW());
     
     std::cout << "Args: " << command_line->GetCommandLineString().ToString() << '\n';
+
     
     // Create a ClientApp of the correct type.
     
@@ -69,6 +73,7 @@ namespace coc {
     
     // Execute the secondary process, if any.
     int exitCode = CefExecuteProcess(mainArgs, app, NULL);
+	
     if (exitCode >= 0) { throw std::runtime_error{"CEF process execution failed"}; }
     
 #endif // defined(TARGET_WIN32)
@@ -97,9 +102,10 @@ namespace coc {
     // Default is LOGSEVERITY_INFO
     cefSettings.log_severity = LOGSEVERITY_VERBOSE;
     
-    
+	
     // Initialize CEF
     const auto didInitialize = CefInitialize(mainArgs, cefSettings, nullptr, nullptr);
+	
     if (not didInitialize) { throw std::runtime_error{"CEF process execution failed"}; }
     
     }
