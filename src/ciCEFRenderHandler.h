@@ -64,10 +64,13 @@ public:
 			for (int y = rect.y; y < rect.y + rect.height; y++)
 			{
 				src = img +  (y * width * 4);
-				for (int i = 0; i < lineWidth; i++, dst++, src++)
+				/*for (int i = 0; i < lineWidth; i++, dst++, src++)
 				{
 					*dst = *src;
-				}
+				}*/
+				memcpy(dst, src, lineWidth);
+				dst += lineWidth;
+
 			}
 
 //			ci::Surface newSurface(rect.width, rect.height, true, ci::SurfaceChannelOrder::BGRA);
