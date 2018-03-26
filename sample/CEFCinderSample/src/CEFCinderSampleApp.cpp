@@ -25,7 +25,7 @@ void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
 
-   mWebViewWrapper.setup("http://fabrica.it", getWindowSize());
+   mWebViewWrapper.setup("http://youtube.com", getWindowSize());
    mWebViewWrapper.registerEvents();
 }
 
