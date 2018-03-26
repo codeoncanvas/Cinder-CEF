@@ -49,11 +49,6 @@ public:
 //		std::cout << "onPaint \t" << mWidth << ", " << mHeight << std::endl;
 
 		memcpy(mSurface->getData(), buffer, mWidth * mHeight * 4);
-		// create a surface
-		/*ci::Surface newSurface(320, 240, true, ci::SurfaceChannelOrder::BGRA);
-		newSurface.copyFrom(*mSurface, ci::Area(100, 100, 420, 340), ci::vec2(-100, -100));
-		mTex->update(newSurface, 0, ci::vec2(100, 100));*/
-
 
 		CefRenderHandler::RectList::const_iterator i = dirtyRects.begin();
 		
@@ -61,92 +56,10 @@ public:
 			const CefRect& rect = *i;
 			ci::Surface newSurface(rect.width, rect.height, true, ci::SurfaceChannelOrder::BGRA);
 			newSurface.copyFrom(*mSurface, ci::Area(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height ), ci::vec2(-1 * rect.x, -1 * rect.y));
-			//newSurface.setChannelOrder(ci::SurfaceChannelOrder::RGBA);
-			//mTex->update(newSurface, 0, ci::vec2(rect.x, rect.y));
 			mTex->update(newSurface.getData(), GL_RGBA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
 		}
 
-
-
-		//mTex->update(newSurface, GL_BGRA, GL_UNSIGNED_BYTE, 0, 639, 480, ci::vec2(1,0));
-
-		////--------------------------------------------------------------
-
-		//	int old_width = view_width_;
-		//	int old_height = view_height_;
-
-		//	view_width_ = width;
-		//	view_height_ = height;
-
-
-		//	if (show_update_rect_)
-		//		update_rect_ = dirtyRects[0];
-
-		//	glPixelStorei(GL_UNPACK_ROW_LENGTH, view_width_); VERIFY_NO_ERROR;
-
-		//	if (old_width != view_width_ || old_height != view_height_ ||
-		//		(dirtyRects.size() == 1 &&
-		//			dirtyRects[0] == CefRect(0, 0, view_width_, view_height_))) {
-		//		// Update/resize the whole texture.
-		//		glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0); VERIFY_NO_ERROR;
-		//		glPixelStorei(GL_UNPACK_SKIP_ROWS, 0); VERIFY_NO_ERROR;
-		//		glTexImage2D(
-		//			GL_TEXTURE_2D, 0, GL_RGBA, view_width_, view_height_, 0,
-		//			GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, buffer); VERIFY_NO_ERROR;
-		//	}
-		//	else {
-		//		// Update just the dirty rectangles.
-		//		CefRenderHandler::RectList::const_iterator i = dirtyRects.begin();
-		//		for (; i != dirtyRects.end(); ++i) {
-
-		//			const CefRect& rect = *i;
-		//			///printf("%i %i %i %i \n", rect.x, rect.y, rect.width,
-		//			//    rect.height);
-
-		//			glPixelStorei(GL_UNPACK_SKIP_PIXELS, rect.x); VERIFY_NO_ERROR;
-		//			glPixelStorei(GL_UNPACK_SKIP_ROWS, rect.y); VERIFY_NO_ERROR;
-		//			glTexSubImage2D(GL_TEXTURE_2D, 0, rect.x, rect.y, rect.width,
-		//				rect.height, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV,
-		//				buffer); VERIFY_NO_ERROR;
-		//		}
-		//	}
-		//}
-		//else if (type == PET_POPUP && popup_rect_.width > 0 &&
-		//	popup_rect_.height > 0) {
-		//	int skip_pixels = 0, x = popup_rect_.x;
-		//	int skip_rows = 0, y = popup_rect_.y;
-		//	int w = width;
-		//	int h = height;
-
-		//	// Adjust the popup to fit inside the view.
-		//	if (x < 0) {
-		//		skip_pixels = -x;
-		//		x = 0;
-		//	}
-		//	if (y < 0) {
-		//		skip_rows = -y;
-		//		y = 0;
-		//	}
-		//	if (x + w > view_width_)
-		//		w -= x + w - view_width_;
-		//	if (y + h > view_height_)
-		//		h -= y + h - view_height_;
-
-		//	// Update the popup rectangle.
-		//	glPixelStorei(GL_UNPACK_ROW_LENGTH, width); VERIFY_NO_ERROR;
-		//	glPixelStorei(GL_UNPACK_SKIP_PIXELS, skip_pixels); VERIFY_NO_ERROR;
-		//	glPixelStorei(GL_UNPACK_SKIP_ROWS, skip_rows); VERIFY_NO_ERROR;
-		//	glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, w, h, GL_BGRA,
-		//		GL_UNSIGNED_INT_8_8_8_8_REV, buffer); VERIFY_NO_ERROR;
-		//}
-
-		//// Disable 2D textures.
-		//glDisable(GL_TEXTURE_2D); VERIFY_NO_ERROR;
-
-		//if (transparent_) {
-		//	// Disable alpha blending.
-		//	glDisable(GL_BLEND); VERIFY_NO_ERROR;
-		//}
+		//mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, mWidth, mHeight, ci::vec2(0,0));
 
 	}
 

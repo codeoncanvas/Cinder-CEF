@@ -83,7 +83,7 @@ void CEFCinderSampleApp::draw() {
 }
 
 void prepareSettings(App::Settings *settings) {
-	settings->setWindowSize(1920*2, 1080*2);
+	settings->setWindowSize(1920, 1080);
     char *argv[5] = {};
     coc::initCiCEF(0, argv);
 }
