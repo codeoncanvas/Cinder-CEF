@@ -63,7 +63,7 @@ public:
 
 			for (int y = rect.y; y < rect.y + rect.height; y++)
 			{
-				src = img +  (y * width * 4);
+				src = img +  (y * width * 4) + (rect.x * 4);
 				/*for (int i = 0; i < lineWidth; i++, dst++, src++)
 				{
 					*dst = *src;
