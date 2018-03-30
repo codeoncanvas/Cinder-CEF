@@ -21,12 +21,12 @@
 #include "ciCEFRenderHandler.h"
 
 namespace coc {
-    
+
     void initCiCEF(int argc, char **argv);
     void updateCEF();
-    
+
     class ciCEF {
-        
+
     public:
         ~ciCEF();
         void setup(std::string url, ci::ivec2 size);
@@ -34,7 +34,7 @@ namespace coc {
         void draw(ci::vec2 pos = ci::vec2(0));
         void reshape( ci::ivec2 size );
         void cleanup();
-        
+
         ci::gl::TextureRef getTexture();
         void registerEvents();
         void unregisterEvents();
@@ -42,14 +42,14 @@ namespace coc {
         void windowResized();
         void onLoadStart();
         void onLoadEnd(int httpStatusCode);
-        
+
 //		void executeJS(const string& command);
        void bindCallFromJS(CefRefPtr<CefListValue> args);
-      
+
         bool mV8ContextCreated = false; // Don't set this
         bool isReady() const { return mV8ContextCreated; }
 
-        
+
         void keyDown( ci::app::KeyEvent event );
         void keyUp( ci::app::KeyEvent event );
         void mouseDown( ci::app::MouseEvent event );
@@ -60,15 +60,15 @@ namespace coc {
 
         bool fixedSize;
         float width_, height_;
-        
+
         CefRefPtr<CefBrowser> browser() const { return mBrowserClient->GetBrowser(); }
-        
+
         CefRefPtr<CefBrowser> mBrowser;
         CefRefPtr<ciCEFBrowserClient> mBrowserClient;
         ciCEFRenderHandler* mRenderHandler;
-        
+
         CefRefPtr<CefListValue> mMessageFromJS;
-        
+
         static constexpr auto mScrollSensitivity = 50;  // set arbitrarily
         const std::vector<int> mNonCharKeys = std::vector<int>{
             ci::app::KeyEvent::KEY_UP, ci::app::KeyEvent::KEY_DOWN,
