@@ -29,8 +29,7 @@ void CEFCinderSampleApp::update() {
 }
 
 void CEFCinderSampleApp::draw() {
-    gl::clear(Color{0, 1, 0});
-
+    gl::clear(Color{0, 0, 0});
     mWebViewWrapper.draw();
 }
 

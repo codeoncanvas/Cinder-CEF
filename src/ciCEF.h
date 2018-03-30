@@ -5,14 +5,18 @@
 #include <algorithm>    // if_any
 #include <iso646.h>     // alternative logical operator tokens
 
-//#include "include/cef_application_mac.h"
-//#include "include/wrapper/cef_helpers.h"
+#if defined(TARGET_OSX)
+#include "include/cef_application_mac.h"
+#endif
+
+#include "include/wrapper/cef_helpers.h"
 
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 
 #include "cef_helpers.h"
+#include "ciCEFClientApp.h"
 #include "ciCEFBrowserClient.h"
 #include "ciCEFRenderHandler.h"
 
@@ -39,19 +43,20 @@ namespace coc {
         void onLoadStart();
         void onLoadEnd(int httpStatusCode);
         
-        void bindCallFromJS(CefRefPtr<CefListValue> args);
+//		void executeJS(const string& command);
+       void bindCallFromJS(CefRefPtr<CefListValue> args);
       
         bool mV8ContextCreated = false; // Don't set this
         bool isReady() const { return mV8ContextCreated; }
 
         
-//        void keyDown( ci::app::KeyEvent event );
-//        void keyUp( ci::app::KeyEvent event );
-//        void mouseDown( ci::app::MouseEvent event );
-//        void mouseUp( ci::app::MouseEvent event );
-//        void mouseWheel( ci::app::MouseEvent event );
-//        void mouseMove( ci::app::MouseEvent event );
-//        void mouseDrag( ci::app::MouseEvent event );
+        void keyDown( ci::app::KeyEvent event );
+        void keyUp( ci::app::KeyEvent event );
+        void mouseDown( ci::app::MouseEvent event );
+        void mouseUp( ci::app::MouseEvent event );
+        void mouseWheel( ci::app::MouseEvent event );
+        void mouseMove( ci::app::MouseEvent event );
+        void mouseDrag( ci::app::MouseEvent event );
 
         bool fixedSize;
         float width_, height_;
