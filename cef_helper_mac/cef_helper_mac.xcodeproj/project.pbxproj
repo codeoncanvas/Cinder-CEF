@@ -408,7 +408,7 @@
 		C5D85773206C9C7300BDE087 /* ciCEFClientApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ciCEFClientApp.h; sourceTree = "<group>"; };
 		C5D85775206C9C9A00BDE087 /* ciCEFV8ExtensionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ciCEFV8ExtensionHandler.h; sourceTree = "<group>"; };
 		C5D85776206C9C9B00BDE087 /* ciCEFV8ExtensionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ciCEFV8ExtensionHandler.cpp; sourceTree = "<group>"; };
-		C5D85778206C9CC800BDE087 /* cefListV8Converter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cefListV8Converter.cpp; sourceTree = "<group>"; };
+		C5D85778206C9CC800BDE087 /* cefListV8Converter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = cefListV8Converter.cpp; sourceTree = "<group>"; };
 		C5D85779206C9CC900BDE087 /* cefListV8Converter.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = cefListV8Converter.hpp; sourceTree = "<group>"; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };

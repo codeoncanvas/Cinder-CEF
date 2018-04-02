@@ -1,5 +1,5 @@
-//#define TARGET_OSX CINDER_COCOA
-#define TARGET_WIN32 CINDER_MSW
+#define TARGET_OSX CINDER_COCOA
+//#define TARGET_WIN32 CINDER_MSW
 
 //#include "cinder/Log.h"
 #include <stdexcept>
@@ -87,7 +87,7 @@ namespace coc {
     cefSettings.command_line_args_disabled = true;
 
 #if defined(TARGET_OSX)
-    cefSettings.remote_debugging_port = 8088;
+    cefSettings.remote_debugging_port = 8089;
     // On Windows this leads to:
     // tcp_socket_win.cc bind() retunred an error: an attempt was made to access a socket in a way forbidden by its access permissions
 #endif
@@ -107,6 +107,13 @@ namespace coc {
     const auto didInitialize = CefInitialize(mainArgs, cefSettings, nullptr, nullptr);
 
     if (not didInitialize) { throw std::runtime_error{"CEF process execution failed"}; }
+        
+//        CFAbsoluteTime fireDate = CFAbsoluteTimeGetCurrent();
+//        CFRunLoopTimerRef timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, fireDate, 1, 0, 0, ^(CFRunLoopTimerRef timer){
+//            CefDoMessageLoopWork();
+//        });
+//        CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
+        
 
     }
 
@@ -180,12 +187,25 @@ namespace coc {
         //        url, settings, nullptr);
 
         if(!mBrowserClient) { CI_LOG_E( "client pointer is NULL" ); }
+        
+//#if defined(TARGET_OSX)
+//        macUpdate = [[ciCEFMacUpdate alloc] init:(id)this];
+//#endif
+        
+
+    }
+    
+    void ciCEF::macHack() {
+        // Single iteration of message loop, does not block
+        CefDoMessageLoopWork();
+        //printf("called");
+        
     }
 
     void ciCEF::update() {
         // Single iteration of message loop, does not block
-        CefDoMessageLoopWork();
-
+        //CefDoMessageLoopWork();
+       
     }
 
 	//--------------------------------------------------------------
@@ -267,6 +287,8 @@ namespace coc {
 
         cefKeyEvent.native_key_code = event.getNativeKeyCode();
         browserHost->SendKeyEvent(cefKeyEvent);
+        
+
     }
 
     void ciCEF::keyUp( KeyEvent event ) {
@@ -370,6 +392,7 @@ namespace coc {
         cefMouseEvent.modifiers = event.getNativeModifiers();
 
         browserHost->SendMouseMoveEvent(cefMouseEvent, false);
+        macHack();
     }
 
     void ciCEF::mouseDrag( MouseEvent event ) {
@@ -384,6 +407,8 @@ namespace coc {
 
     void ciCEF::draw( ci::vec2  pos ) {
 
+        //CefDoMessageLoopWork();
+        
         if (!mV8ContextCreated) return;
 
         gl::TextureRef tex = getTexture();

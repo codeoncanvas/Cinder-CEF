@@ -27,6 +27,7 @@ void CEFCinderSampleApp::setup() {
 
    mWebViewWrapper.setup("http://youtube.com", getWindowSize());
    mWebViewWrapper.registerEvents();
+    
 }
 
 void CEFCinderSampleApp::mouseDown(MouseEvent event) {

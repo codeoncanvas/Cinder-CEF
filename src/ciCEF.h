@@ -7,6 +7,7 @@
 
 #if defined(TARGET_OSX)
 #include "include/cef_application_mac.h"
+#include "ciCEFMacUpdate.h"
 #endif
 
 #include "include/wrapper/cef_helpers.h"
@@ -15,7 +16,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 
-#include "cef_helpers.h"
+//#include "cef_helpers.h"
 #include "ciCEFClientApp.h"
 #include "ciCEFBrowserClient.h"
 #include "ciCEFRenderHandler.h"
@@ -30,6 +31,7 @@ namespace coc {
     public:
         ~ciCEF();
         void setup(std::string url, ci::ivec2 size);
+        void macHack();
         void update();
         void draw(ci::vec2 pos = ci::vec2(0));
         void reshape( ci::ivec2 size );
@@ -60,6 +62,10 @@ namespace coc {
 
         bool fixedSize;
         float width_, height_;
+        
+        #if defined(TARGET_OSX)
+        ciCEFMacUpdate *macUpdate;
+        #endif
 
         CefRefPtr<CefBrowser> browser() const { return mBrowserClient->GetBrowser(); }
 
