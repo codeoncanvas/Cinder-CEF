@@ -94,7 +94,7 @@ namespace coc {
     //cefSettings.external_message_pump = true;
     
     // Default is LOGSEVERITY_INFO
-    cefSettings.log_severity = LOGSEVERITY_VERBOSE;
+    cefSettings.log_severity = LOGSEVERITY_DISABLE;
     
 	
     // Initialize CEF
@@ -102,6 +102,16 @@ namespace coc {
 	
     if (not didInitialize) { throw std::runtime_error{"CEF process execution failed"}; }
     
+#if defined(TARGET_WIN32)
+
+	// Take back std:cout from CEF for CI_LOG
+	AllocConsole();
+	freopen("conout$", "w", stdout);
+	auto str = new std::ofstream("conout$");
+	std::cout.rdbuf(str->rdbuf());
+
+#endif
+
     }
     
     
@@ -174,6 +184,7 @@ namespace coc {
         //        url, settings, nullptr);
         
         if(!mBrowserClient) { CI_LOG_E( "client pointer is NULL" ); }
+
     }
     
     void ciCEF::update() {

@@ -1,6 +1,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/Log.h"
 #include "ciCEF.h"
 
 using namespace ci;
@@ -24,13 +25,13 @@ private:
 void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
-
+	CI_LOG_I("Info log test");
    mWebViewWrapper.setup("http://youtube.com", getWindowSize());
    mWebViewWrapper.registerEvents();
 }
 
 void CEFCinderSampleApp::mouseDown(MouseEvent event) {
-	
+	CI_LOG_E("Mousdown to test error log");
 }
 
 void CEFCinderSampleApp::update() {
@@ -84,6 +85,7 @@ void CEFCinderSampleApp::draw() {
 
 void prepareSettings(App::Settings *settings) {
 	settings->setWindowSize(1920, 1080);
+	settings->setConsoleWindowEnabled();
     char *argv[5] = {};
     coc::initCiCEF(0, argv);
 }
