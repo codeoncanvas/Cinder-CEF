@@ -367,7 +367,17 @@ namespace coc {
     }
     
     void ciCEF::mouseDrag( MouseEvent event ) {
-        // not yet implemented, see ClientHandler::StartDragging if required
+
+		if (browser() == nullptr) { return; }
+		const auto browserHost = browser()->GetHost();
+		if (browserHost == nullptr) { return; }
+
+		CefMouseEvent cefMouseEvent;
+		cefMouseEvent.x = event.getX();
+		cefMouseEvent.y = event.getY();
+		cefMouseEvent.modifiers = event.getNativeModifiers();
+
+		browserHost->SendMouseMoveEvent(cefMouseEvent, false);
     }
     
     void ciCEF::bindCallFromJS(CefRefPtr<CefListValue> args) {
