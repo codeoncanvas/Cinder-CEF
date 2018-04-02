@@ -57,12 +57,6 @@ namespace coc {
         
         if (process_type == kRendererProcess) {
             app = new ciCEFClientApp();
-            
-            //#if defined(OS_LINUX)
-            //        } else if (process_type == kZygoteProcess) {
-            //            return ZygoteProcess;
-            //
-            //#endif // defined(OS_LINUX)
         } else {
             //app = new ClientAppOther();
         }
@@ -264,9 +258,9 @@ namespace coc {
             cefKeyEvent.type = KEYEVENT_CHAR;
             cefKeyEvent.character = event.getChar();
         }
-        
+		cefKeyEvent.windows_key_code = event.getChar();
         cefKeyEvent.native_key_code = event.getNativeKeyCode();
-        browserHost->SendKeyEvent(cefKeyEvent);
+		browser()->GetHost()->SendKeyEvent(cefKeyEvent);
     }
     
     void ciCEF::keyUp( KeyEvent event ) {
@@ -286,9 +280,9 @@ namespace coc {
         } else {
             cefKeyEvent.type = KEYEVENT_KEYUP;
         }
-        
+		cefKeyEvent.windows_key_code = event.getChar();
         cefKeyEvent.native_key_code = event.getNativeKeyCode();
-        browserHost->SendKeyEvent(cefKeyEvent);
+		browser()->GetHost()->SendKeyEvent(cefKeyEvent);
     }
     
     void ciCEF::mouseDown( MouseEvent event ) {
