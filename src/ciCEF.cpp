@@ -194,14 +194,14 @@ namespace coc {
     }
     
 	//--------------------------------------------------------------
-	//void ciCEF::executeJS(const string& command) {
+	void ciCEF::executeJS(const std::string& command) {
 
-	//	if (!browser()) { return; }
+		if (!browser()) { return; }
 
-	//	CefRefPtr<CefFrame> frame = browser()->GetMainFrame();
-	//	frame->ExecuteJavaScript(command, frame->GetURL(), 0);
+		CefRefPtr<CefFrame> frame = browser()->GetMainFrame();
+		frame->ExecuteJavaScript(command, frame->GetURL(), 0);
 
-	//}
+	}
 
     void ciCEF::onLoadStart() {
         

@@ -22,8 +22,6 @@ namespace coc {
     
     void initCiCEF(int argc, char **argv);
 
-	
-
 	class ciCEFJSMessageArgs {
 
 		public:
@@ -49,7 +47,7 @@ namespace coc {
         void onLoadStart();
         void onLoadEnd(int httpStatusCode);
         
-//		void executeJS(const string& command);
+		void executeJS(const std::string& command);
 		ci::signals::Signal<void(ciCEFJSMessageArgs&)> signalJS;
 
 		template <typename ArgumentsType, class ListenerClass>

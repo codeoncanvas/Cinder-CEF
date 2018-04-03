@@ -32,7 +32,7 @@ void CEFCinderSampleApp::setup() {
 }
 
 void CEFCinderSampleApp::mouseDown(MouseEvent event) {
-	CI_LOG_E("Mousdown to test error log");
+	mWebViewWrapper.executeJS("callFromCinder()");
 }
 
 void CEFCinderSampleApp::update() {
