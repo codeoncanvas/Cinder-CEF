@@ -1,7 +1,7 @@
 #include "include/wrapper/cef_helpers.h"
 #include "ciCEF.h"
 #include "ciCEFBrowserClient.h"
-//#include "cinder/Log.h"
+#include "cinder/Log.h"
 
 ciCEFBrowserClient::ciCEFBrowserClient(
 	coc::ciCEF *parent, ciCEFRenderHandler *renderHandler) {
@@ -39,13 +39,11 @@ bool ciCEFBrowserClient::OnProcessMessageReceived(
 	// Retrieve the argument values.
 	std::string name = message->GetName().ToString();
 
-	//ofLogVerbose() << "Message: " << name << " ; " << args;
-	//CI_LOG_V("Message: " << name << " ; " << args);
-	std::cout << "Message: " << name << " ; " << args << '\n';
-
+	CI_LOG_I("Message: " << name << " ; " << args);
+	
 	std::string jsBindPrefix = "js-bind-";
 	if (name.compare(0, jsBindPrefix.size(), jsBindPrefix) == 0) {
-		//mParent->bindCallFromJS(args);
+		mParent->bindCallFromJS(args);
 		return true;
 	}
 	else if (name == "OnV8ContextCreated") {

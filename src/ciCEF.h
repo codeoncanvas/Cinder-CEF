@@ -9,6 +9,7 @@
 #include "include/wrapper/cef_helpers.h"
 
 #include "cinder/app/App.h"
+#include "cinder/app/Event.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 
@@ -20,7 +21,15 @@
 namespace coc {
     
     void initCiCEF(int argc, char **argv);
-    void updateCEF();
+
+	
+
+	class ciCEFJSMessageArgs {
+
+		public:
+			CefRefPtr<CefListValue> args;
+	};
+
     
     class ciCEF {
         
@@ -30,7 +39,7 @@ namespace coc {
         void update();
         void draw(ci::vec2 pos = ci::vec2(0));
         void reshape( ci::ivec2 size );
-        void cleanup();
+        //void cleanup();
         
         ci::gl::TextureRef getTexture();
         void registerEvents();
@@ -41,7 +50,12 @@ namespace coc {
         void onLoadEnd(int httpStatusCode);
         
 //		void executeJS(const string& command);
-       void bindCallFromJS(CefRefPtr<CefListValue> args);
+		ci::signals::Signal<void(ciCEFJSMessageArgs&)> signalJS;
+
+		template <typename ArgumentsType, class ListenerClass>
+		void bind(ListenerClass * listener, std::string functionName, void(ListenerClass::*listenerMethod)(ArgumentsType&) );
+
+        void bindCallFromJS(CefRefPtr<CefListValue> args);
       
         bool mV8ContextCreated = false; // Don't set this
         bool isReady() const { return mV8ContextCreated; }
@@ -75,4 +89,24 @@ namespace coc {
             ci::app::KeyEvent::KEY_DELETE, ci::app::KeyEvent::KEY_BACKSPACE};
 
     };
+
+	template <typename ArgumentsType, class ListenerClass>
+	void ciCEF::bind(ListenerClass * listener, std::string functionName, void(ListenerClass::* listenerMethod)(ArgumentsType&)){
+
+		// Tell renderer process that we want
+		CefRefPtr<CefProcessMessage> message = CefProcessMessage::Create("js-make-bind");
+
+		// Retrieve the argument list object. Set the function name
+		CefRefPtr<CefListValue> args = message->GetArgumentList();
+		args->SetSize(1);
+		args->SetString(0, functionName);
+
+		// Send the message to the render process
+		if (browser()) {
+			browser()->SendProcessMessage(PID_RENDERER, message);
+		}
+
+		signalJS.connect(signals::slot(listener, listenerMethod));
+		//		ofAddListener(messageFromJS, listener, listenerMethod, prio);
+	}
 }

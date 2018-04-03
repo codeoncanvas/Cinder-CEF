@@ -19,14 +19,15 @@ public:
 	ci::Font mFont;
 
 private:
-	//void gotMessageFromJS(const ofxCEFJSMessageArgs& msg);
+	void gotMessageFromJS(const coc::ciCEFJSMessageArgs& msg);
+	bool jsFunctionBinded = false;
 };
 
 void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
 	CI_LOG_I("Info log test");
-   mWebViewWrapper.setup("http://youtube.com", getWindowSize());
+   mWebViewWrapper.setup("file:///C:/Users/syddty/Desktop/Retail/controller/index.html", getWindowSize());
    mWebViewWrapper.registerEvents();
 }
 
@@ -36,46 +37,47 @@ void CEFCinderSampleApp::mouseDown(MouseEvent event) {
 
 void CEFCinderSampleApp::update() {
 
-	//if (!jsFunctionBinded && cef.isReady()) {
+	if (!jsFunctionBinded && mWebViewWrapper.isReady()) {
 
-	//	// Bind js function 'dataToOf' to C++ method 'ofApp::gotMessageFromJS'
-	//	cef.bind("dataToCinder", this, &App::gotMessageFromJS);
-	//	jsFunctionBinded = true;
-	//}
+		CI_LOG_I("Ready to bind to JS");
+		mWebViewWrapper.bind(this, "DataToCinder", &CEFCinderSampleApp::gotMessageFromJS);
+		//mWebViewWrapper.bind(this, "DataToCinder", &CEFCinderSampleApp::gotMessageFromJS);
+		jsFunctionBinded = true;
+	}
 
     mWebViewWrapper.update();
 }
 
-/*
-void CEFCinderSampleApp::gotMessageFromJS(const ofxCEFJSMessageArgs& msg) {
 
-	cout << "gotMessageFromJS()" << endl;
+void CEFCinderSampleApp::gotMessageFromJS(const coc::ciCEFJSMessageArgs& msg) {
+
+	CI_LOG_I("gotMessageFromJS()");
 
 	for (int i = 0; i < msg.args->GetSize(); i++) {
 		CefValueType type = msg.args->GetType(i);
-		ofLogNotice() << "  Message index " + ofToString(i) + " of type " + ofToString(type);
+		CI_LOG_I( "  Message index " + std::to_string(i) + " of type " + std::to_string(type));
 
 		switch (type) {
 		case VTYPE_BOOL:
-			ofLogNotice() << "  Bool content: " << ofToString(msg.args->GetBool(i));
+			CI_LOG_I("  Bool content: " << std::to_string(msg.args->GetBool(i)));
 			break;
 		case VTYPE_INT:
-			ofLogNotice() << "  Int content: " << ofToString(msg.args->GetInt(i));
+			CI_LOG_I("  Int content: " << std::to_string(msg.args->GetInt(i)));
 			break;
 		case VTYPE_DOUBLE:
-			ofLogNotice() << "  Double content: " << ofToString(msg.args->GetDouble(i));
+			CI_LOG_I("  Double content: " << std::to_string(msg.args->GetDouble(i)));
 			break;
 		case VTYPE_STRING:
-			ofLogNotice() << "  String content: " << msg.args->GetString(i).ToString();
+			CI_LOG_I("  String content: " << msg.args->GetString(i).ToString());
 			break;
 
 		default:
-			ofLogNotice() << "  Might be a VTYPE_BINARY, VTYPE_DICTIONARY or VTYPE_LIST";
+			CI_LOG_I("  Might be a VTYPE_BINARY, VTYPE_DICTIONARY or VTYPE_LIST");
 			break;
 		}
 	}
 }
-*/
+
 
 void CEFCinderSampleApp::draw() {
     gl::clear(Color{0, 0, 0});

@@ -392,9 +392,13 @@ namespace coc {
     }
     
     void ciCEF::bindCallFromJS(CefRefPtr<CefListValue> args) {
-        //mMessageFromJS = args;
-    
-        //TODO ofNotifyEvent(messageFromJS, msg, this);
+        
+		ciCEFJSMessageArgs msg;
+		msg.args = args;
+		//msg.args = args;
+		CI_LOG_I("Received JS call in ciCEF");
+
+		signalJS.emit(msg);
     }
     
     void ciCEF::draw( ci::vec2  pos ) {
