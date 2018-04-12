@@ -79,9 +79,10 @@ namespace coc {
     cefSettings.single_process = false;
     cefSettings.windowless_rendering_enabled = true;
     cefSettings.command_line_args_disabled = true;
+	cefSettings.remote_debugging_port = 8080;
     
 #if defined(TARGET_OSX)
-    cefSettings.remote_debugging_port = 8088;
+    cefSettings.remote_debugging_port = 8080;
     // On Windows this leads to:
     // tcp_socket_win.cc bind() retunred an error: an attempt was made to access a socket in a way forbidden by its access permissions
 #endif
@@ -301,11 +302,11 @@ namespace coc {
         const auto browserHost = browser()->GetHost();
         if (browserHost == nullptr) { return; }
         
-        const auto mouseButtonType =
-        event.isLeft() ? MBT_LEFT :
+		const auto mouseButtonType = MBT_LEFT;
+        //event.isLeft() ? MBT_LEFT :
         //event.isRight() ? MBT_RIGHT :  // causes crash, so treat as middle
         //TODO can use EVENTFLAG_LEFT_MOUSE_BUTTON
-        MBT_MIDDLE;
+        //MBT_MIDDLE;
         
         CefMouseEvent cefMouseEvent;
         cefMouseEvent.x = event.getX();
@@ -332,10 +333,10 @@ namespace coc {
         const auto browserHost = browser()->GetHost();
         if (browserHost == nullptr) { return; }
         
-        const auto mouseButtonType =
-        event.isLeft() ? MBT_LEFT :
+		const auto mouseButtonType = MBT_LEFT;
+        //event.isLeft() ? MBT_LEFT :
         //event.isRight() ? MBT_RIGHT :  // causes crash, so treat as middle
-        MBT_MIDDLE;
+        //MBT_MIDDLE;
         
         CefMouseEvent cefMouseEvent;
         cefMouseEvent.x = event.getX();
