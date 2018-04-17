@@ -27,7 +27,9 @@ void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
 	CI_LOG_I("Info log test");
-   mWebViewWrapper.setup("file:///C:/Users/syddty/Desktop/Retail/controller/index.html", getWindowSize());
+//   mWebViewWrapper.setup("file:///C:/Users/syddty/Desktop/Retail/controller/index.html", getWindowSize());
+   mWebViewWrapper.setup("http://codeoncanvas.cc", getWindowSize());
+
    mWebViewWrapper.registerEvents();
 }
 
