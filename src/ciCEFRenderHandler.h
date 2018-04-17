@@ -46,9 +46,6 @@ public:
 		PaintElementType type, const RectList &dirtyRects, const void *buffer,
 		int width, int height) override {
 
-		int rl = 0;
-		
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glPixelStorei(GL_UNPACK_ROW_LENGTH, width);
 
 		CefRenderHandler::RectList::const_iterator i = dirtyRects.begin();
@@ -77,6 +74,8 @@ public:
 			//delete newimage;
 		}
 
+		glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
+		glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
 		glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
 
 	}

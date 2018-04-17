@@ -28,7 +28,7 @@ void CEFCinderSampleApp::setup() {
     mFont = Font("Arial", 18.0f);
 	CI_LOG_I("Info log test");
 //   mWebViewWrapper.setup("file:///C:/Users/syddty/Desktop/Retail/controller/index.html", getWindowSize());
-   mWebViewWrapper.setup("http://codeoncanvas.cc", getWindowSize());
+   mWebViewWrapper.setup("http://vimeo.com", getWindowSize());
 
    mWebViewWrapper.registerEvents();
 }
@@ -39,13 +39,14 @@ void CEFCinderSampleApp::mouseDown(MouseEvent event) {
 
 void CEFCinderSampleApp::update() {
 
-	if (!jsFunctionBinded && mWebViewWrapper.isReady()) {
+	
+	/*if (!jsFunctionBinded && mWebViewWrapper.isReady()) {
 
 		CI_LOG_I("Ready to bind to JS");
 		mWebViewWrapper.bind(this, "DataToCinder", &CEFCinderSampleApp::gotMessageFromJS);
-		//mWebViewWrapper.bind(this, "DataToCinder", &CEFCinderSampleApp::gotMessageFromJS);
 		jsFunctionBinded = true;
-	}
+	
+	}*/
 
     mWebViewWrapper.update();
 }
