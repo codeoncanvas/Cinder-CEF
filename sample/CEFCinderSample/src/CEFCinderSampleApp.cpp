@@ -28,7 +28,7 @@ void CEFCinderSampleApp::setup() {
     mFont = Font("Arial", 18.0f);
 	CI_LOG_I("Info log test");
 //   mWebViewWrapper.setup("file:///C:/Users/syddty/Desktop/Retail/controller/index.html", getWindowSize());
-   mWebViewWrapper.setup("http://vimeo.com", getWindowSize());
+   mWebViewWrapper.setup("https://bl.ocks.org/mbostock/2647924", getWindowSize());
 
    mWebViewWrapper.registerEvents();
 }
@@ -83,7 +83,7 @@ void CEFCinderSampleApp::gotMessageFromJS(const coc::ciCEFJSMessageArgs& msg) {
 
 
 void CEFCinderSampleApp::draw() {
-    gl::clear(Color{0, 0, 0});
+    gl::clear(Color{1, 1, 1});
     mWebViewWrapper.draw();
 	gl::drawString("FPS: " + std::to_string(getAverageFps()), ci::vec2(10.0f, 10.0f), Color::white(), mFont);
 }
@@ -91,6 +91,7 @@ void CEFCinderSampleApp::draw() {
 void prepareSettings(App::Settings *settings) {
 	settings->setWindowSize(1920, 1080);
 	settings->setConsoleWindowEnabled();
+	//settings->setFrameRate(120);
     char *argv[5] = {};
     coc::initCiCEF(0, argv);
 }

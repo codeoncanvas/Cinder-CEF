@@ -57,6 +57,7 @@ namespace coc {
         
         if (process_type == kRendererProcess) {
             app = new ciCEFClientApp();
+			app->OnBeforeCommandLineProcessing(process_type, command_line);
         } else {
             //app = new ClientAppOther();
         }
@@ -78,7 +79,7 @@ namespace coc {
     cefSettings.background_color = 0xFFFF00FF;
     cefSettings.single_process = false;
     cefSettings.windowless_rendering_enabled = true;
-    cefSettings.command_line_args_disabled = false;
+    cefSettings.command_line_args_disabled = true;
 	cefSettings.remote_debugging_port = 8080;
     
 #if defined(TARGET_OSX)

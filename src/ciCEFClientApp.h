@@ -31,49 +31,7 @@ public:
             CefRefPtr<CefProcessMessage> message) OVERRIDE;
 
     virtual void OnBeforeCommandLineProcessing(const CefString &process_type,
-            CefRefPtr<CefCommandLine> command_line) OVERRIDE {
-#if defined(TARGET_OSX)
-
-#elif defined(TARGET_WIN32)
-        CefString osr(L"-off-screen-rendering-enabled");
-        command_line->AppendSwitch(osr);
-
-        CefString d3d11(L"-disable-d3d11");
-        command_line->AppendSwitch(d3d11);
-
-        CefString frameScheduling(L"-enable-begin-frame-scheduling");
-        command_line->AppendSwitch(frameScheduling);
-
-		CefString vsync(L"-disable-gpu-vsync");
-		command_line->AppendSwitch(vsync);
-#endif
-
-        //CI_LOG_I("Args (OnBeforeCommandLineProcessing): "
-        //        << command_line->GetCommandLineString().ToString());
-        std::cout << "Args (OnBeforeCommandLineProcessing): "
-                << command_line->GetCommandLineString().ToString() << '\n';
-
-        // CefString singleProcess(L"-single-process");
-        // command_line->AppendSwitch(singleProcess);
-
-        // CefString igProxy(L"-no-proxy-server");
-        // command_line->AppendSwitch(igProxy);
-
-        // CefString addFile(L"-allow-file-access-from-files");
-        // command_line->AppendSwitch(addFile);
-
-        // CefString touchEventsDisabled(L"-touch-events=disabled");
-        // command_line->AppendSwitch(touchEventsDisabled);
-
-        // CefString screenCap(L"-allow-http-screen-capture");
-        // command_line->AppendSwitch(screenCap);
-
-        // CefString optimizedUI(L"-touch-optimized-ui=disabled");
-        // command_line->AppendSwitch(optimizedUI);
-
-        // CefString touchSimulated(L"-simulate-touch-screen-with-mouse");
-        // command_line->AppendSwitch(touchSimulated);
-    }
+            CefRefPtr<CefCommandLine> command_line) OVERRIDE;
 
     CefRefPtr<ciCEFV8ExtensionHandler> mV8Handler;
     CefRefPtr<CefV8Context> mV8Context;
