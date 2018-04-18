@@ -43,6 +43,9 @@ public:
 
         CefString frameScheduling(L"-enable-begin-frame-scheduling");
         command_line->AppendSwitch(frameScheduling);
+
+		CefString vsync(L"-disable-gpu-vsync");
+		command_line->AppendSwitch(vsync);
 #endif
 
         //CI_LOG_I("Args (OnBeforeCommandLineProcessing): "
