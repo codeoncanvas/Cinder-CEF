@@ -70,7 +70,7 @@ public:
 
 			//}
 
-			mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
+			//mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
 			//delete newimage;
 		}
 

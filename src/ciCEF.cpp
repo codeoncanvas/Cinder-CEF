@@ -43,6 +43,7 @@ namespace coc {
     CefRefPtr<CefCommandLine> command_line = CefCommandLine::CreateCommandLine();
     command_line->InitFromString(::GetCommandLineW());
     
+	string args = command_line->GetCommandLineString().ToString();
     std::cout << "Args: " << command_line->GetCommandLineString().ToString() << '\n';
 
     
@@ -78,7 +79,7 @@ namespace coc {
     cefSettings.background_color = 0xFFFF00FF;
     cefSettings.single_process = false;
     cefSettings.windowless_rendering_enabled = true;
-    cefSettings.command_line_args_disabled = true;
+    cefSettings.command_line_args_disabled = false;
 	cefSettings.remote_debugging_port = 8080;
     
 #if defined(TARGET_OSX)
@@ -89,7 +90,7 @@ namespace coc {
     
     // This could be used on windows, could improve performance
     // If you enable this, 'CefDoMessageLoopWork()' should not be called
-    // cefSettings.multi_threaded_message_loop = true;
+    cefSettings.multi_threaded_message_loop = true;
     
     // Implement external message pump?! see 'main_message_loop_external_pump' in 'ceftest/shared/browser'
     //cefSettings.external_message_pump = true;
@@ -180,7 +181,7 @@ namespace coc {
         settings.web_security = STATE_DISABLED;
         
         mBrowserClient = new ciCEFBrowserClient{this, mRenderHandler};
-        CefBrowserHost::CreateBrowserSync(windowInfo, mBrowserClient.get(), url, settings, NULL);
+        CefBrowserHost::CreateBrowser(windowInfo, mBrowserClient.get(), url, settings, NULL);
         //mBrowser = CefBrowserHost::CreateBrowserSync(windowInfo, mBrowserClient.get(),
         //        url, settings, nullptr);
         
@@ -190,7 +191,20 @@ namespace coc {
     
     void ciCEF::update() {
         // Single iteration of message loop, does not block
-        CefDoMessageLoopWork();
+        //CefDoMessageLoopWork();
+		MSG msg;
+
+		// Run the application message loop.
+		if (GetMessage(&msg, NULL, 0, 0)) {
+			//CI_LOG_I("received a message");
+			//TranslateMessage(&msg);
+			//DispatchMessage(&msg);
+			/*if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}*/
+		}
+
      
     }
     
