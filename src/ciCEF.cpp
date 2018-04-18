@@ -78,7 +78,7 @@ namespace coc {
     cefSettings.background_color = 0xFFFF00FF;
     cefSettings.single_process = false;
     cefSettings.windowless_rendering_enabled = true;
-    cefSettings.command_line_args_disabled = true;
+    cefSettings.command_line_args_disabled = false;
 	cefSettings.remote_debugging_port = 8080;
     
 #if defined(TARGET_OSX)
