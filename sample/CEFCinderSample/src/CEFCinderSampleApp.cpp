@@ -27,7 +27,8 @@ void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
 	CI_LOG_I("Info log test");
-   mWebViewWrapper.setup("https://bl.ocks.org/mbostock/2647924", getWindowSize());
+   //mWebViewWrapper.setup("https://bl.ocks.org/mbostock/2647924", getWindowSize());
+   mWebViewWrapper.setup("file:///C:/Users/syddty/Downloads/css_animations_test/index.html", getWindowSize());
    mWebViewWrapper.registerEvents();
 }
 
@@ -89,7 +90,7 @@ void CEFCinderSampleApp::draw() {
 void prepareSettings(App::Settings *settings) {
 	settings->setWindowSize(1920, 1080);
 	settings->setConsoleWindowEnabled();
-	//settings->setFrameRate(120);
+	settings->setFrameRate(-1);
     char *argv[5] = {};
     coc::initCiCEF(0, argv);
 }

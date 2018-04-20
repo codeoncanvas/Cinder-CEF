@@ -51,8 +51,8 @@ void  ciCEFClientApp::OnBeforeCommandLineProcessing(const CefString &process_typ
 CefString osr(L"-off-screen-rendering-enabled");
 command_line->AppendSwitch(osr);
 
-//CefString d3d11(L"-disable-d3d11");
-//command_line->AppendSwitch(d3d11);
+CefString d3d11(L"-disable-d3d11");
+command_line->AppendSwitch(d3d11);
 
 //CefString frameScheduling(L"-enable-begin-frame-scheduling");
 //command_line->AppendSwitch(frameScheduling);

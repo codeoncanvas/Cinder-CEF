@@ -10,6 +10,7 @@
 
 #include <cef_app.h>
 #include "cinder/Log.h"
+#include "cinder/Timeline.h"
 #include "ciCEFRenderHandler.h"
 #include "ciCEF.h"
 
@@ -176,7 +177,7 @@ namespace coc {
         
         CefBrowserSettings settings;
         settings.webgl = STATE_ENABLED;
-        settings.windowless_frame_rate = 60;
+        settings.windowless_frame_rate = 30;
         settings.background_color = 0x00FFFFFF;
         settings.web_security = STATE_DISABLED;
         
@@ -187,11 +188,22 @@ namespace coc {
         
         if(!mBrowserClient) { CI_LOG_E( "client pointer is NULL" ); }
 
+		//ci::CueRef mCue = timeline().add(std::bind(&ciCEF::loop, this), timeline().getCurrentTime() + 1);
+		//mCue->setDuration(0.001);
+		//mCue->setLoop();
+
+
     }
     
+	void ciCEF::loop() {
+		//CefDoMessageLoopWork();
+	}
+
     void ciCEF::update() {
         // Single iteration of message loop, does not block
         CefDoMessageLoopWork();
+
+
      
     }
     
