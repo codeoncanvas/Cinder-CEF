@@ -58,6 +58,7 @@ namespace coc {
         
         if (process_type == kRendererProcess) {
             app = new ciCEFClientApp();
+			app->OnBeforeCommandLineProcessing(process_type, command_line);
         } else {
             //app = new ClientAppOther();
         }
@@ -79,7 +80,7 @@ namespace coc {
     cefSettings.background_color = 0xFFFF00FF;
     cefSettings.single_process = false;
     cefSettings.windowless_rendering_enabled = true;
-    cefSettings.command_line_args_disabled = true;
+    cefSettings.command_line_args_disabled = false;
 	cefSettings.remote_debugging_port = 8080;
     
 #if defined(TARGET_OSX)
@@ -93,10 +94,10 @@ namespace coc {
     cefSettings.multi_threaded_message_loop = true;
     
     // Implement external message pump?! see 'main_message_loop_external_pump' in 'ceftest/shared/browser'
-    //cefSettings.external_message_pump = true;
+    cefSettings.external_message_pump = true;
     
     // Default is LOGSEVERITY_INFO
-    cefSettings.log_severity = LOGSEVERITY_DISABLE;
+    cefSettings.log_severity = LOGSEVERITY_INFO;
     
 	
     // Initialize CEF
@@ -179,7 +180,7 @@ namespace coc {
         settings.windowless_frame_rate = 60;
         settings.background_color = 0x00FFFFFF;
         settings.web_security = STATE_DISABLED;
-        
+         
         mBrowserClient = new ciCEFBrowserClient{this, mRenderHandler};
         CefBrowserHost::CreateBrowser(windowInfo, mBrowserClient.get(), url, settings, NULL);
         //mBrowser = CefBrowserHost::CreateBrowserSync(windowInfo, mBrowserClient.get(),
@@ -195,15 +196,15 @@ namespace coc {
 		MSG msg;
 
 		// Run the application message loop.
-		if (GetMessage(&msg, NULL, 0, 0)) {
+//		if (GetMessage(&msg, NULL, 0, 0)) {
 			//CI_LOG_I("received a message");
-			//TranslateMessage(&msg);
-			//DispatchMessage(&msg);
+//			TranslateMessage(&msg);
+//			DispatchMessage(&msg);
 			/*if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}*/
-		}
+//		}
 
      
     }
@@ -287,6 +288,7 @@ namespace coc {
 		cefKeyEvent.windows_key_code = event.getChar();
         cefKeyEvent.native_key_code = event.getNativeKeyCode();
 		browser()->GetHost()->SendKeyEvent(cefKeyEvent);
+		
     }
     
     void ciCEF::keyUp( KeyEvent event ) {

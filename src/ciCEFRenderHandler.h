@@ -12,11 +12,18 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/Rand.h"
+#include "cinder/ConcurrentCircularBuffer.h"
 
 
 class ciCEFRenderHandler : public CefRenderHandler {
 public:
+
+	ci::gl::ContextRef backgroundCtx;
+
 	ciCEFRenderHandler(int width, int height) : mWidth{ width }, mHeight{ height } {
+
+		backgroundCtx = ci::gl::Context::create(ci::gl::context());
+
 		const size_t bufferSize = mWidth * mHeight * 4;
 		mBuffer = std::unique_ptr<uint8_t>{ new uint8_t[bufferSize] };
 		memset(mBuffer.get(), 0, bufferSize);
@@ -33,6 +40,12 @@ public:
 		return true;
 	}
 
+	bool GetScreenInfo(CefRefPtr< CefBrowser > browser, CefScreenInfo& screen_info) {
+		return false;
+	}
+
+
+
 	// Called when an element should be painted. Pixel values passed to this
 	// method are scaled relative to the view coordinates based on the value of
 	// `CefScreenInfo.device_scale_factor` returned from `GetScreenInfo`.
@@ -45,6 +58,8 @@ public:
 	void OnPaint(CefRefPtr<CefBrowser> browser,
 		PaintElementType type, const RectList &dirtyRects, const void *buffer,
 		int width, int height) override {
+
+		backgroundCtx->makeCurrent();
 
 		glPixelStorei(GL_UNPACK_ROW_LENGTH, width);
 
@@ -70,7 +85,7 @@ public:
 
 			//}
 
-			//mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
+			mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
 			//delete newimage;
 		}
 
