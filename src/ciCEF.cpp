@@ -177,7 +177,7 @@ namespace coc {
         
         CefBrowserSettings settings;
         settings.webgl = STATE_ENABLED;
-        settings.windowless_frame_rate = 60;
+        settings.windowless_frame_rate = 30;
         settings.background_color = 0x00FFFFFF;
         settings.web_security = STATE_DISABLED;
          
@@ -193,18 +193,19 @@ namespace coc {
     void ciCEF::update() {
         // Single iteration of message loop, does not block
         //CefDoMessageLoopWork();
+		if (!mV8ContextCreated) return;
 		MSG msg;
 
 		// Run the application message loop.
-//		if (GetMessage(&msg, NULL, 0, 0)) {
+		//if (GetMessage(&msg, NULL, 0, 0)) {
 			//CI_LOG_I("received a message");
-//			TranslateMessage(&msg);
-//			DispatchMessage(&msg);
+			//TranslateMessage(&msg);
+			//DispatchMessage(&msg);
 			/*if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}*/
-//		}
+		//}
 
      
     }
@@ -228,13 +229,13 @@ namespace coc {
     }
     
     void ciCEF::registerEvents() {
-        getWindow()->getSignalKeyDown().connect( signals::slot( this, &ciCEF::keyDown) );
-        getWindow()->getSignalKeyUp().connect( signals::slot( this, &ciCEF::keyUp) );
+//        getWindow()->getSignalKeyDown().connect( signals::slot( this, &ciCEF::keyDown) );
+//        getWindow()->getSignalKeyUp().connect( signals::slot( this, &ciCEF::keyUp) );
         getWindow()->getSignalMouseDown().connect( signals::slot( this, &ciCEF::mouseDown) );
         getWindow()->getSignalMouseUp().connect( signals::slot( this, &ciCEF::mouseUp) );
-        getWindow()->getSignalMouseWheel().connect( signals::slot( this, &ciCEF::mouseWheel) );
-        getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
-        getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
+//        getWindow()->getSignalMouseWheel().connect( signals::slot( this, &ciCEF::mouseWheel) );
+//        getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
+//        getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
     }
 
 	void ciCEF::unregisterEvents() {
