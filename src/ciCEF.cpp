@@ -81,7 +81,12 @@ namespace coc {
     cefSettings.single_process = false;
     cefSettings.windowless_rendering_enabled = true;
     cefSettings.command_line_args_disabled = false;
-	cefSettings.remote_debugging_port = 8080;
+	//cefSettings.remote_debugging_port = 8080;
+	//const char* bsp = "C:\code\chromium_git\chromium\src\out\Release_GN_x64\cefclient.exe";
+	//CefString(&cefSettings.browser_subprocess_path).FromASCII(bsp);
+
+
+
     
 #if defined(TARGET_OSX)
     cefSettings.remote_debugging_port = 8080;
@@ -94,7 +99,7 @@ namespace coc {
     cefSettings.multi_threaded_message_loop = true;
     
     // Implement external message pump?! see 'main_message_loop_external_pump' in 'ceftest/shared/browser'
-    cefSettings.external_message_pump = true;
+    //cefSettings.external_message_pump = true;
     
     // Default is LOGSEVERITY_INFO
     cefSettings.log_severity = LOGSEVERITY_INFO;
@@ -229,13 +234,13 @@ namespace coc {
     }
     
     void ciCEF::registerEvents() {
-//        getWindow()->getSignalKeyDown().connect( signals::slot( this, &ciCEF::keyDown) );
-//        getWindow()->getSignalKeyUp().connect( signals::slot( this, &ciCEF::keyUp) );
+        getWindow()->getSignalKeyDown().connect( signals::slot( this, &ciCEF::keyDown) );
+        getWindow()->getSignalKeyUp().connect( signals::slot( this, &ciCEF::keyUp) );
         getWindow()->getSignalMouseDown().connect( signals::slot( this, &ciCEF::mouseDown) );
         getWindow()->getSignalMouseUp().connect( signals::slot( this, &ciCEF::mouseUp) );
-//        getWindow()->getSignalMouseWheel().connect( signals::slot( this, &ciCEF::mouseWheel) );
-//        getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
-//        getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
+        getWindow()->getSignalMouseWheel().connect( signals::slot( this, &ciCEF::mouseWheel) );
+        getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
+        getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
     }
 
 	void ciCEF::unregisterEvents() {

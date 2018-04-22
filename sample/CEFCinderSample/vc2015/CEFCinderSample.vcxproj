@@ -100,11 +100,16 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
     </Link>
+    <Manifest>
+      <AdditionalManifestFiles>compatibility.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Manifest Include="compatibility.manifest" />
+  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="..\..\..\src\cefListV8Converter.cpp" />

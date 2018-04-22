@@ -57,14 +57,17 @@ command_line->AppendSwitch(mtml);
 //CefString emp(L"-external-message-pump");
 //command_line->AppendSwitch(emp);
 
-CefString d3d11(L"-disable-d3d11");
-command_line->AppendSwitch(d3d11);
+//CefString d3d11(L"-disable-d3d11");
+//command_line->AppendSwitch(d3d11);
 //
 CefString frameScheduling(L"-enable-begin-frame-scheduling");
 command_line->AppendSwitch(frameScheduling);
-//
+
 //CefString vsync(L"-disable-gpu-vsync");
 //command_line->AppendSwitch(vsync);
+
+CefString gpu(L"-enable-gpu");
+command_line->AppendSwitch(gpu);
 
 // CefString singleProcess(L"-single-process");
 // command_line->AppendSwitch(singleProcess);
