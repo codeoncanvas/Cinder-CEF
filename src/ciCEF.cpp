@@ -121,9 +121,6 @@ namespace coc {
     
     ciCEF::~ciCEF() {
         
-        //TODO: clean up
-		unregisterEvents();
-
 		// Shut down CEF.
 		if (browser()) {
 			browser()->GetHost()->CloseBrowser(true);
@@ -188,23 +185,15 @@ namespace coc {
         
         if(!mBrowserClient) { CI_LOG_E( "client pointer is NULL" ); }
 
-		//ci::CueRef mCue = timeline().add(std::bind(&ciCEF::loop, this), timeline().getCurrentTime() + 1);
-		//mCue->setDuration(0.001);
-		//mCue->setLoop();
-
 
     }
-    
-	void ciCEF::loop() {
-		//CefDoMessageLoopWork();
-	}
+   
 
     void ciCEF::update() {
         // Single iteration of message loop, does not block
-        CefDoMessageLoopWork();
 
+		CefDoMessageLoopWork();
 
-     
     }
     
 	//--------------------------------------------------------------
@@ -234,34 +223,21 @@ namespace coc {
         getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
         getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
     }
-
-	void ciCEF::unregisterEvents() {
-		//TODO disconnect signals
-		//getWindow()->getSignalKeyDown().disconnect( signals::slot( this, &CinderCEF::keyDown) );
-		//getWindow()->getSignalKeyUp().disconnect( signals::slot( this, &CinderCEF::keyUp) );
-		//getWindow()->getSignalMouseDown().disconnect( signals::slot( this, &CinderCEF::mouseDown) );
-		//getWindow()->getSignalMouseUp().disconnect( signals::slot( this, &CinderCEF::mouseUp) );
-		//getWindow()->getSignalMouseWheel().disconnect( signals::slot( this, &CinderCEF::mouseWheel) );
-		//getWindow()->getSignalMouseMove().disconnect( signals::slot( this, &CinderCEF::mouseMove) );
-		//getWindow()->getSignalMouseDrag().disconnect( signals::slot( this, &CinderCEF::mouseDrag) );
-	}
     
     void ciCEF::enableResize(){
-        //ofAddListener(ofEvents().windowResized, this, &ofxCEF::windowResized);
-        getWindow()->getSignalResize().connect( signals::slot( this, &ciCEF::windowResized) );
-    }
+        
+		getWindow()->getSignalResize().connect( signals::slot( this, &ciCEF::windowResized) );
+    
+	}
     
     void ciCEF::reshape( ci::ivec2 size ) {
-        //TODO this doesn't work fully
-        
-        //mRenderHandler->reshape(size.x,size.y);
-        
-        // Check host is available
-        if (browser() == nullptr) { return; }
+    
+		if (browser() == nullptr) { return; }
         const auto browserHost = browser()->GetHost();
         if (browserHost == nullptr) { return; }
         
         browserHost->WasResized();
+
     }
     
     void ciCEF::keyDown( KeyEvent event ) {
@@ -408,8 +384,6 @@ namespace coc {
     void ciCEF::bindCallFromJS(CefRefPtr<CefListValue> args) {
         
 		ciCEFJSMessageArgs msg;
-		msg.args = args;
-		//msg.args = args;
 		CI_LOG_I("Received JS call in ciCEF");
 
 		signalJS.emit(msg);

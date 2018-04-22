@@ -26,28 +26,30 @@ private:
 void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
-	CI_LOG_I("Info log test");
-   //mWebViewWrapper.setup("https://bl.ocks.org/mbostock/2647924", getWindowSize());
-   mWebViewWrapper.setup("file:///C:/Users/syddty/Downloads/css_animations_test/index.html", getWindowSize());
-   mWebViewWrapper.registerEvents();
+    CI_LOG_I("Info log test");
+    mWebViewWrapper.setup("https://bl.ocks.org/mbostock/2647924", getWindowSize());
+    mWebViewWrapper.registerEvents();
+
 }
 
 void CEFCinderSampleApp::mouseDown(MouseEvent event) {
+
 	mWebViewWrapper.executeJS("callFromCinder()");
+
 }
 
 void CEFCinderSampleApp::update() {
 
-	
-	/*if (!jsFunctionBinded && mWebViewWrapper.isReady()) {
+	if (!jsFunctionBinded && mWebViewWrapper.isReady()) {
 
 		CI_LOG_I("Ready to bind to JS");
 		mWebViewWrapper.bind(this, "DataToCinder", &CEFCinderSampleApp::gotMessageFromJS);
 		jsFunctionBinded = true;
 	
-	}*/
+	}
 
-    mWebViewWrapper.update();
+	mWebViewWrapper.update();
+
 }
 
 
@@ -82,9 +84,13 @@ void CEFCinderSampleApp::gotMessageFromJS(const coc::ciCEFJSMessageArgs& msg) {
 
 
 void CEFCinderSampleApp::draw() {
+
     gl::clear(Color{1, 1, 1});
-    mWebViewWrapper.draw();
-	gl::drawString("FPS: " + std::to_string(getAverageFps()), ci::vec2(10.0f, 10.0f), Color::white(), mFont);
+
+	mWebViewWrapper.draw();
+
+	gl::drawString("FPS: " + std::to_string(getAverageFps()), ci::vec2(10.0f, 10.0f), Color::black(), mFont);
+	
 }
 
 void prepareSettings(App::Settings *settings) {

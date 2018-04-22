@@ -34,15 +34,12 @@ namespace coc {
     public:
         ~ciCEF();
         void setup(std::string url, ci::ivec2 size);
-		void loop();
         void update();
         void draw(ci::vec2 pos = ci::vec2(0));
         void reshape( ci::ivec2 size );
-        //void cleanup();
-        
+   
         ci::gl::TextureRef getTexture();
         void registerEvents();
-        void unregisterEvents();
         void enableResize();
         void windowResized();
         void onLoadStart();
@@ -106,6 +103,6 @@ namespace coc {
 		}
 
 		signalJS.connect(signals::slot(listener, listenerMethod));
-		//		ofAddListener(messageFromJS, listener, listenerMethod, prio);
+
 	}
 }

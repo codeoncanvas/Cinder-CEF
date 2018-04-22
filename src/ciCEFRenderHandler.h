@@ -56,22 +56,8 @@ public:
 			glPixelStorei(GL_UNPACK_SKIP_PIXELS, rect.x);
 			glPixelStorei(GL_UNPACK_SKIP_ROWS, rect.y);
 
-			//uint8_t *img = (uint8_t*)buffer;
-			//uint8_t *src = NULL;
-			//uint8_t *newimage = new uint8_t[rect.width * rect.height * 4];
-			//uint8_t *dst = newimage;
-			//short lineWidth = rect.width * 4; //Width of line to be copied
-
-			//for (int y = rect.y; y < rect.y + rect.height; y++)
-			//{
-			//	src = img + (y * width * 4 + rect.x * 4);
-			//	memcpy(dst, src, lineWidth);
-			//	dst += lineWidth;
-
-			//}
-
 			mTex->update(buffer, GL_BGRA, GL_UNSIGNED_BYTE, 0, rect.width, rect.height, ci::vec2(rect.x, rect.y));
-			//delete newimage;
+	
 		}
 
 		glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
