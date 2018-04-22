@@ -97,8 +97,7 @@ namespace coc {
     //cefSettings.external_message_pump = true;
     
     // Default is LOGSEVERITY_INFO
-    cefSettings.log_severity = LOGSEVERITY_DISABLE;
-    
+    cefSettings.log_severity = LOGSEVERITY_INFO;
 	
     // Initialize CEF
     const auto didInitialize = CefInitialize(mainArgs, cefSettings, nullptr, nullptr);
@@ -215,6 +214,7 @@ namespace coc {
     }
     
     void ciCEF::registerEvents() {
+
         getWindow()->getSignalKeyDown().connect( signals::slot( this, &ciCEF::keyDown) );
         getWindow()->getSignalKeyUp().connect( signals::slot( this, &ciCEF::keyUp) );
         getWindow()->getSignalMouseDown().connect( signals::slot( this, &ciCEF::mouseDown) );
@@ -222,6 +222,7 @@ namespace coc {
         getWindow()->getSignalMouseWheel().connect( signals::slot( this, &ciCEF::mouseWheel) );
         getWindow()->getSignalMouseMove().connect( signals::slot( this, &ciCEF::mouseMove) );
         getWindow()->getSignalMouseDrag().connect( signals::slot( this, &ciCEF::mouseDrag) );
+
     }
     
     void ciCEF::enableResize(){
@@ -384,9 +385,11 @@ namespace coc {
     void ciCEF::bindCallFromJS(CefRefPtr<CefListValue> args) {
         
 		ciCEFJSMessageArgs msg;
+		msg.args = args;
 		CI_LOG_I("Received JS call in ciCEF");
 
 		signalJS.emit(msg);
+
     }
     
     void ciCEF::draw( ci::vec2  pos ) {

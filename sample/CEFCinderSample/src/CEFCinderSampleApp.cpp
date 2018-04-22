@@ -11,7 +11,7 @@ using namespace std;
 class CEFCinderSampleApp : public App {
 public:
     void setup() override;
-    void mouseDown(MouseEvent event) override;
+    void keyDown(KeyEvent event) override;
     void update() override;
     void draw() override;
 
@@ -27,12 +27,12 @@ void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
     CI_LOG_I("Info log test");
-    mWebViewWrapper.setup("https://bl.ocks.org/mbostock/2647924", getWindowSize());
+    mWebViewWrapper.setup("http://codeoncanvas.cc", getWindowSize());
     mWebViewWrapper.registerEvents();
 
 }
 
-void CEFCinderSampleApp::mouseDown(MouseEvent event) {
+void CEFCinderSampleApp::keyDown(KeyEvent event) {
 
 	mWebViewWrapper.executeJS("callFromCinder()");
 
