@@ -102,7 +102,7 @@ namespace coc {
 			browser()->SendProcessMessage(PID_RENDERER, message);
 		}
 
-		signalJS.connect(signals::slot(listener, listenerMethod));
+        signalJS.connect(cinder::signals::slot(listener, listenerMethod));
 
 	}
 }

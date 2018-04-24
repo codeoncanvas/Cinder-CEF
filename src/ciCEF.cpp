@@ -1,10 +1,7 @@
-//#define TARGET_OSX CINDER_COCOA
-#define TARGET_WIN32 CINDER_MSW
-
 //#include "cinder/Log.h"
 #include <stdexcept>
 
-#if defined(TARGET_OSX)
+#if defined(CINDER_MAC)
 #include <Cocoa/Cocoa.h>
 #endif
 
@@ -25,20 +22,15 @@ namespace coc {
 		std::cout << "initCiCEF" << endl;
 		
     
-    #if defined(TARGET_OSX)
+    #if defined(CINDER_MAC)
         CefMainArgs mainArgs(argc, argv);
     
-    #elif defined(TARGET_WIN32)
+    #elif defined(CINDER_MSW)
         CefMainArgs mainArgs(::GetModuleHandle(NULL));
     
     // These flags must match the Chromium values.
     const char kProcessType[] = "type";
     const char kRendererProcess[] = "renderer";
-    
-    //#if defined(OS_LINUX)
-    //    const char kZygoteProcess[] = "zygote";
-    //
-    //#endif // defined(OS_LINUX)
     
     // Parse command-line arguments.
     CefRefPtr<CefCommandLine> command_line = CefCommandLine::CreateCommandLine();
@@ -48,7 +40,6 @@ namespace coc {
 
     
     // Create a ClientApp of the correct type.
-    
     CefRefPtr<CefApp> app;
     
     // The command-line flag won't be specified for the browser process.
@@ -59,22 +50,15 @@ namespace coc {
         if (process_type == kRendererProcess) {
             app = new ciCEFClientApp();
 			app->OnBeforeCommandLineProcessing(process_type, command_line);
-        } else {
-            //app = new ClientAppOther();
         }
-        
-    } else {
-        //app = new ClientAppBrowser();
     }
-    
+        
     // Execute the secondary process, if any.
     int exitCode = CefExecuteProcess(mainArgs, app, NULL);
 	
     if (exitCode >= 0) { throw std::runtime_error{"CEF process execution failed"}; }
     
 #endif // defined(TARGET_WIN32)
-    
-    //CefRefPtr<ofxCEFClientApp> app(new ofxCEFClientApp);
     
     CefSettings cefSettings;
     cefSettings.background_color = 0xFFFF00FF;
@@ -83,7 +67,7 @@ namespace coc {
     cefSettings.command_line_args_disabled = true;
 	cefSettings.remote_debugging_port = 8080;
     
-#if defined(TARGET_OSX)
+#if defined(CINDER_MAC)
     cefSettings.remote_debugging_port = 8080;
     // On Windows this leads to:
     // tcp_socket_win.cc bind() retunred an error: an attempt was made to access a socket in a way forbidden by its access permissions
@@ -104,7 +88,7 @@ namespace coc {
 	
     if (not didInitialize) { throw std::runtime_error{"CEF process execution failed"}; }
     
-#if defined(TARGET_WIN32)
+#if defined(CINDER_MSW)
 
 	// Take back std:cout from CEF for CI_LOG
 	AllocConsole();
@@ -115,8 +99,6 @@ namespace coc {
 #endif
 
     }
-    
-    
     
     ciCEF::~ciCEF() {
         
@@ -136,40 +118,26 @@ namespace coc {
         CefWindowInfo windowInfo;
         mRenderHandler = new ciCEFRenderHandler{ size.x, size.y };
         
-#if defined(TARGET_OSX)
+#if defined(CINDER_MAC)
         
         NSView * view =  (NSView *) getWindow()->getNative();
         NSWindow * cocoaWindow = [ view window ];
         [cocoaWindow setReleasedWhenClosed:NO];
         windowInfo.SetAsWindowless(view);
         
-#elif defined(TARGET_WIN32)
+#elif defined(CINDER_MSW)
+        
 		HWND hWnd = (HWND)ci::app::getWindow()->getNative();
         windowInfo.SetAsWindowless(hWnd);
+
 #endif
         
-        
-        if (size.x <= 0 && size.y <= 0) {
-            width_ = size.x;
-            height_ = size.y;
-            
-#if defined(TARGET_OSX)
-            //        if (mRenderHandler->bIsRetinaDisplay) { //todo: add
-            //            width_ = size.x*2;
-            //            height_ = size.y*2;
-            //        }
-#endif
-            //        enableResize(); //todo: register resize event
-        }
-        else {
-            width_ = size.x;
-            height_ = size.y;
-        }
+        width_ = size.x;
+        height_ = size.y;
         
         // Tell the mRenderHandler about the size
         // Do it before the using it in the browser client
         mRenderHandler->reshape(width_, height_); //todo: equivalent needed?
-        
         
         CefBrowserSettings settings;
         settings.webgl = STATE_ENABLED;
@@ -179,18 +147,15 @@ namespace coc {
         
         mBrowserClient = new ciCEFBrowserClient{this, mRenderHandler};
         CefBrowserHost::CreateBrowserSync(windowInfo, mBrowserClient.get(), url, settings, NULL);
-        //mBrowser = CefBrowserHost::CreateBrowserSync(windowInfo, mBrowserClient.get(),
-        //        url, settings, nullptr);
         
         if(!mBrowserClient) { CI_LOG_E( "client pointer is NULL" ); }
-
 
     }
    
 
     void ciCEF::update() {
+        
         // Single iteration of message loop, does not block
-
 		CefDoMessageLoopWork();
 
     }
@@ -206,10 +171,12 @@ namespace coc {
 	}
 
     void ciCEF::onLoadStart() {
+     
         
     }
     
     void ciCEF::onLoadEnd(int httpStatusCode) {
+        
         
     }
     
@@ -334,6 +301,7 @@ namespace coc {
         cefMouseEvent.modifiers = event.getNativeModifiers();
         
         browser()->GetHost()->SendMouseClickEvent(cefMouseEvent, mouseButtonType, true, 1);
+    
     }
     
     void ciCEF::mouseWheel( MouseEvent event ) {
@@ -351,6 +319,7 @@ namespace coc {
         cefMouseEvent.modifiers = event.getNativeModifiers();
         
         browser()->GetHost()->SendMouseWheelEvent(cefMouseEvent, 0, deltaY);
+    
     }
     
     void ciCEF::mouseMove( MouseEvent event ) {
@@ -366,6 +335,12 @@ namespace coc {
         cefMouseEvent.modifiers = event.getNativeModifiers();
         
         browserHost->SendMouseMoveEvent(cefMouseEvent, false);
+    
+        // This is a hack to get something drawing on mac
+        #if defined(CINDER_MAC)
+            CefDoMessageLoopWork();
+        #endif
+    
     }
     
     void ciCEF::mouseDrag( MouseEvent event ) {
@@ -380,6 +355,7 @@ namespace coc {
 		cefMouseEvent.modifiers = event.getNativeModifiers();
 
 		browserHost->SendMouseMoveEvent(cefMouseEvent, false);
+    
     }
     
     void ciCEF::bindCallFromJS(CefRefPtr<CefListValue> args) {
@@ -402,12 +378,10 @@ namespace coc {
         // TODO implement cursor changes, see CefRenderHandler::OnCursorChange
     }
     
-    ci::gl::TextureRef ciCEF::getTexture()
-    {
+    ci::gl::TextureRef ciCEF::getTexture() {
+        
         return mRenderHandler->getTexture();
+    
     }
-    
-    
-    
     
 }

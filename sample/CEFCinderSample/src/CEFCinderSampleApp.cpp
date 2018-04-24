@@ -95,7 +95,9 @@ void CEFCinderSampleApp::draw() {
 
 void prepareSettings(App::Settings *settings) {
 	settings->setWindowSize(1920, 1080);
+#if defined(CINDER_MSW)
 	settings->setConsoleWindowEnabled();
+#endif
 	settings->setFrameRate(-1);
     char *argv[5] = {};
     coc::initCiCEF(0, argv);

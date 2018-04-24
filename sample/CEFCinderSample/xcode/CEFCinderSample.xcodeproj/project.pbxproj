@@ -23,7 +23,6 @@
 		C57BB854205B8165004C0212 /* Chromium Embedded Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57BB851205B8165004C0212 /* Chromium Embedded Framework.framework */; };
 		C57BB855205B8165004C0212 /* cef_helper_mac.app in Resources */ = {isa = PBXBuildFile; fileRef = C57BB852205B8165004C0212 /* cef_helper_mac.app */; };
 		C5A61C25205F5C8900DED73D /* ciCEFBrowserClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5A61C23205F5C8900DED73D /* ciCEFBrowserClient.cpp */; };
-		C5A61C28205F5CD500DED73D /* ciCEFRenderHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5A61C27205F5CD500DED73D /* ciCEFRenderHandler.cpp */; };
 		C5A61C2A205F6AF100DED73D /* Chromium Embedded Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57BB851205B8165004C0212 /* Chromium Embedded Framework.framework */; };
 		C5A61C2B205F6AF100DED73D /* Chromium Embedded Framework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C57BB851205B8165004C0212 /* Chromium Embedded Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -317,7 +316,6 @@
 		C5A61C23205F5C8900DED73D /* ciCEFBrowserClient.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ciCEFBrowserClient.cpp; path = ../../../src/ciCEFBrowserClient.cpp; sourceTree = "<group>"; };
 		C5A61C24205F5C8900DED73D /* ciCEFBrowserClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ciCEFBrowserClient.h; path = ../../../src/ciCEFBrowserClient.h; sourceTree = "<group>"; };
 		C5A61C26205F5CD500DED73D /* ciCEFRenderHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ciCEFRenderHandler.h; path = ../../../src/ciCEFRenderHandler.h; sourceTree = "<group>"; };
-		C5A61C27205F5CD500DED73D /* ciCEFRenderHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ciCEFRenderHandler.cpp; path = ../../../src/ciCEFRenderHandler.cpp; sourceTree = "<group>"; };
 		D84CF1BDB0E14CE9B9CEB24B /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -452,7 +450,6 @@
 		C57BB6C8205B706F004C0212 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				C5A61C27205F5CD500DED73D /* ciCEFRenderHandler.cpp */,
 				C5A61C26205F5CD500DED73D /* ciCEFRenderHandler.h */,
 				C5A61C23205F5C8900DED73D /* ciCEFBrowserClient.cpp */,
 				C5A61C24205F5C8900DED73D /* ciCEFBrowserClient.h */,
@@ -908,7 +905,6 @@
 				C5A61C25205F5C8900DED73D /* ciCEFBrowserClient.cpp in Sources */,
 				C57BB6E0205B7A13004C0212 /* ciCEF.cpp in Sources */,
 				0AC5561FC3364E448A60C741 /* CEFCinderSampleApp.cpp in Sources */,
-				C5A61C28205F5CD500DED73D /* ciCEFRenderHandler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
