@@ -36,7 +36,7 @@ libcef_dll_wrapper/Release/libcef_dll_wrapper.a ->  Cinder-CEF/lib/osx
 
 5. Build cef_helper_mac
 ```
-xcodebuild -target cef_helper_mac -configuration Release -project $1/../../cef_helper_mac/cef_helper_mac.xcodeproj/
+xcodebuild -target cef_helper_mac -configuration Release -project ../../cef_helper_mac/cef_helper_mac.xcodeproj/
 ```
 
 6. In the project settings go to Build Phases. There we need another `Run Script` build phase. Press the `+` then `New Run Script Phase`. In there goes:
