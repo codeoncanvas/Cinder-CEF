@@ -55,3 +55,7 @@ Removing the following files from Cinder-CEF/lib/export/vs/x64/
 ## Multi-threaded Message Loop
 
 Cinder-CEF is currently setup to run in a single-threaded mode. While some performance benefit may be possible using CEF's multi-threaded-message-loop option, there appears to be some clash with Cinder's message handling that causes CEF to hang until mouse events are received. Efforts continue on a (currently broken) branch [here](https://github.com/codeoncanvas/Cinder-CEF/tree/multithreaded)
+
+## Command-line arguments
+
+Mileage varies but there are a number of CEF command-line arguments which may improve performance in some cases. Some of these are included but commented out inside `ciCEFClient.cpp`. These allow things like gpu-vsync and begin-frame-scheduling to be enabled/disabled.
