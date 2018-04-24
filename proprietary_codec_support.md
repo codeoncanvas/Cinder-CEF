@@ -14,7 +14,16 @@ The key differences:
 * In addition Visual Studio and the Windows 10 SDK also we also needed to install Ninja from [here](https://github.com/ninja-build/ninja/releases)
 * At Step 2: don't download depot_tools.zip, just create a directory for it at `c:\code\depot_tools` - It will be downloaded automatically by the automate-git.py at step 6.
 * Skip Step 3
-* At Step 4 make add an additonal Environment Variable since we are using VS2015 (TODO: Add detail)
+* At Step 4 make add an additional Environment Variable `CEF_VCVARS` with the following value (because we are using VS2015 instead of VS2017)
+```
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat
+```
+* Make sure the following are included in your PATH Variable
+```
+c:\code\depot_tools
+C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\
+C:\Program Files (x86)\Windows Kits\10\bin\10.0.15063.0\x64
+```
 * At Step 6 - use the following in place of the contents provided
 ```
 set CEF_USE_GN=1
