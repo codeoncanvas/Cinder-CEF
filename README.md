@@ -9,7 +9,7 @@ OS X Support is a Work-in-progress
 Cinder-CEF depends on a pre-built version of libCEF version which can be created using Git Bash on Windows using the following steps.
 Depends on [cmake](https://cmake.org/download/) and VS 2015.
 
-For proprietary video codecs it is necessary to build CEF from source with specific compiler flags set. Further details are [here](proprietary_video_support.md)
+For proprietary video codecs it is necessary to build CEF from source with specific compiler flags set. Further details are [here](proprietary_codec_support.md)
 
 1. Download version 3.3282.1734.g8f26fe0 of CEF
 
