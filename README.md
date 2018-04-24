@@ -51,10 +51,10 @@ Removing the following files from Cinder-CEF/lib/export/vs/x64/
 - widevinecdmadapter.dll
 ```
 
-## Multithreaded Message Loop
+## Multi-threaded Message Loop
 
 Cinder-CEF is currently setup to run in a single-threaded mode. While some performance benefit may be possible using CEF's multi-threaded-message-loop option, there appears to be some clash with Cinder's message handling that causes CEF to hang until mouse events are received.
 
-## OSX Support
+## OS X Support
 
 Support for Mac OS X is a work in progress. Unlike on Windows, Cinder-CEF relies on a secondary browser process to run on a Mac which is automatically started. This setup exhibits a similar issue to the Multithreaded Message Loop issue described above. More details on setting up Cinder-CEF for Mac are [here](osx_notes.md)
