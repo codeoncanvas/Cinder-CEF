@@ -1,8 +1,9 @@
 # Cinder-CEF
 
 A (currently windows-only) block for integrating CEF in Cinder with support for Cinder <-> CEF communication via Javascript.
+This effort owes much to [this branch of ofxCEF](https://github.com/michaelbaisch/ofxCef/tree/make_it_work) for OpenFrameworks
 
-OS X Support is a Work-in-progress
+OS X Support is a Work-in-progress. More details on setting up Cinder-CEF for Mac are [here](osx_notes.md)
 
 ## Building CEF
 
@@ -53,8 +54,4 @@ Removing the following files from Cinder-CEF/lib/export/vs/x64/
 
 ## Multi-threaded Message Loop
 
-Cinder-CEF is currently setup to run in a single-threaded mode. While some performance benefit may be possible using CEF's multi-threaded-message-loop option, there appears to be some clash with Cinder's message handling that causes CEF to hang until mouse events are received.
-
-## OS X Support
-
-Support for Mac OS X is a work in progress. Unlike on Windows, Cinder-CEF relies on a secondary browser process to run on a Mac which is automatically started. This setup exhibits a similar issue to the Multithreaded Message Loop issue described above. More details on setting up Cinder-CEF for Mac are [here](osx_notes.md)
+Cinder-CEF is currently setup to run in a single-threaded mode. While some performance benefit may be possible using CEF's multi-threaded-message-loop option, there appears to be some clash with Cinder's message handling that causes CEF to hang until mouse events are received. Efforts continue on a (currently broken) branch [here](https://github.com/codeoncanvas/Cinder-CEF/tree/multithreaded)
