@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-#include "cinder/Log.h"
+//#include "cinder/Log.h"
 #include "ciCEFClientApp.h"
 #include "cef_build.h"
 
@@ -23,8 +23,8 @@ void ciCEFClientApp::OnContextCreated(CefRefPtr<CefBrowser> browser,
     // Add the "myfunc" function to the "window" object.
     // globalObject->SetValue("myfunc", func, V8_PROPERTY_ATTRIBUTE_NONE);
 
-    CI_LOG_I("OnContextCreated\n");
-    //std::cout << "OnContextCreated\n";
+    //CI_LOG_I("OnContextCreated\n");
+    std::cout << "OnContextCreated\n";
 
     // Tell browser that V8 Context was created
     CefRefPtr<CefProcessMessage> message =
@@ -92,8 +92,8 @@ bool ciCEFClientApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
     // Retrieve message name
     std::string name = message->GetName().ToString();
 
-    CI_LOG_I("Renderer received message: " << name);
-    //std::cout << "Renderer received message: " << name << '\n';
+    //CI_LOG_I("Renderer received message: " << name);
+    std::cout << "Renderer received message: " << name << '\n';
 
     if (name == "js-make-bind") {
 

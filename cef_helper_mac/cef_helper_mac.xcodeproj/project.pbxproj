@@ -7,17 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5C8D0E82091B75300E22D98 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0E72091B75300E22D98 /* OpenGL.framework */; };
-		C5C8D0EA2091B76400E22D98 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0E92091B76400E22D98 /* AVFoundation.framework */; };
-		C5C8D0EC2091B78A00E22D98 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0EB2091B78A00E22D98 /* Cocoa.framework */; };
-		C5C8D0EE2091B79000E22D98 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0ED2091B79000E22D98 /* CoreMedia.framework */; };
-		C5C8D0F32091B7E600E22D98 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0EF2091B7A800E22D98 /* CoreVideo.framework */; };
-		C5C8D0F52091B7ED00E22D98 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F42091B7ED00E22D98 /* Accelerate.framework */; };
-		C5C8D0F82091B7F600E22D98 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F62091B7F600E22D98 /* AudioToolbox.framework */; };
-		C5C8D0F92091B7F600E22D98 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F72091B7F600E22D98 /* AudioUnit.framework */; };
-		C5C8D0FA2091B81500E22D98 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F12091B7C000E22D98 /* CoreAudio.framework */; };
-		C5C8D0FC2091B83200E22D98 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0FB2091B83200E22D98 /* IOKit.framework */; };
-		C5C8D0FE2091B83900E22D98 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0FD2091B83900E22D98 /* IOSurface.framework */; };
 		C5D85763206C94CD00BDE087 /* Chromium Embedded Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856D8206C94CD00BDE087 /* Chromium Embedded Framework.framework */; };
 		C5D85764206C94CD00BDE087 /* libcef_dll_wrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856DA206C94CD00BDE087 /* libcef_dll_wrapper.a */; };
 		C5D85766206C956D00BDE087 /* process_helper_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D85765206C956D00BDE087 /* process_helper_mac.cpp */; };
@@ -438,17 +427,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5C8D0FE2091B83900E22D98 /* IOSurface.framework in Frameworks */,
-				C5C8D0FC2091B83200E22D98 /* IOKit.framework in Frameworks */,
-				C5C8D0FA2091B81500E22D98 /* CoreAudio.framework in Frameworks */,
-				C5C8D0F82091B7F600E22D98 /* AudioToolbox.framework in Frameworks */,
-				C5C8D0F92091B7F600E22D98 /* AudioUnit.framework in Frameworks */,
-				C5C8D0F52091B7ED00E22D98 /* Accelerate.framework in Frameworks */,
-				C5C8D0F32091B7E600E22D98 /* CoreVideo.framework in Frameworks */,
-				C5C8D0EE2091B79000E22D98 /* CoreMedia.framework in Frameworks */,
-				C5C8D0EC2091B78A00E22D98 /* Cocoa.framework in Frameworks */,
-				C5C8D0EA2091B76400E22D98 /* AVFoundation.framework in Frameworks */,
-				C5C8D0E82091B75300E22D98 /* OpenGL.framework in Frameworks */,
 				C5D85763206C94CD00BDE087 /* Chromium Embedded Framework.framework in Frameworks */,
 				C5D85764206C94CD00BDE087 /* libcef_dll_wrapper.a in Frameworks */,
 			);
@@ -1176,10 +1154,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				OTHER_LDFLAGS = (
-					"../../../blocks/Cinder-CEF/libs/CEF/lib/osx/libcef_dll_wrapper.a",
-					../../../lib/macosx/Release/libcinder.a,
-				);
+				OTHER_LDFLAGS = "../../../blocks/Cinder-CEF/libs/CEF/lib/osx/libcef_dll_wrapper.a";
 				PRODUCT_BUNDLE_IDENTIFIER = cc.openFrameworks.ofapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1214,10 +1189,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				OTHER_LDFLAGS = (
-					"../../../blocks/Cinder-CEF/libs/CEF/lib/osx/libcef_dll_wrapper.a",
-					../../../lib/macosx/Release/libcinder.a,
-				);
+				OTHER_LDFLAGS = "../../../blocks/Cinder-CEF/libs/CEF/lib/osx/libcef_dll_wrapper.a";
 				PRODUCT_BUNDLE_IDENTIFIER = cc.openFrameworks.ofapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
