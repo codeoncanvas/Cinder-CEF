@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5D8575F206C94CD00BDE087 /* libcef_dll_wrapper.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856D1206C94CD00BDE087 /* libcef_dll_wrapper.lib */; };
-		C5D85760206C94CD00BDE087 /* libcef.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856D2206C94CD00BDE087 /* libcef.lib */; };
-		C5D85761206C94CD00BDE087 /* libcef_dll_wrapper.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856D4206C94CD00BDE087 /* libcef_dll_wrapper.lib */; };
-		C5D85762206C94CD00BDE087 /* libcef.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856D6206C94CD00BDE087 /* libcef.lib */; };
+		C5C8D0E82091B75300E22D98 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0E72091B75300E22D98 /* OpenGL.framework */; };
+		C5C8D0EA2091B76400E22D98 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0E92091B76400E22D98 /* AVFoundation.framework */; };
+		C5C8D0EC2091B78A00E22D98 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0EB2091B78A00E22D98 /* Cocoa.framework */; };
+		C5C8D0EE2091B79000E22D98 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0ED2091B79000E22D98 /* CoreMedia.framework */; };
+		C5C8D0F32091B7E600E22D98 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0EF2091B7A800E22D98 /* CoreVideo.framework */; };
+		C5C8D0F52091B7ED00E22D98 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F42091B7ED00E22D98 /* Accelerate.framework */; };
+		C5C8D0F82091B7F600E22D98 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F62091B7F600E22D98 /* AudioToolbox.framework */; };
+		C5C8D0F92091B7F600E22D98 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F72091B7F600E22D98 /* AudioUnit.framework */; };
+		C5C8D0FA2091B81500E22D98 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0F12091B7C000E22D98 /* CoreAudio.framework */; };
+		C5C8D0FC2091B83200E22D98 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0FB2091B83200E22D98 /* IOKit.framework */; };
+		C5C8D0FE2091B83900E22D98 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C8D0FD2091B83900E22D98 /* IOSurface.framework */; };
 		C5D85763206C94CD00BDE087 /* Chromium Embedded Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856D8206C94CD00BDE087 /* Chromium Embedded Framework.framework */; };
 		C5D85764206C94CD00BDE087 /* libcef_dll_wrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D856DA206C94CD00BDE087 /* libcef_dll_wrapper.a */; };
 		C5D85766206C956D00BDE087 /* process_helper_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D85765206C956D00BDE087 /* process_helper_mac.cpp */; };
@@ -21,6 +28,18 @@
 
 /* Begin PBXFileReference section */
 		412C182E1F95F89200E2B940 /* cef_helper_mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cef_helper_mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5C8D0E12091B2F300E22D98 /* libcinder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcinder.a; path = ../../../lib/macosx/Release/libcinder.a; sourceTree = "<group>"; };
+		C5C8D0E72091B75300E22D98 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		C5C8D0E92091B76400E22D98 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C5C8D0EB2091B78A00E22D98 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		C5C8D0ED2091B79000E22D98 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C5C8D0EF2091B7A800E22D98 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		C5C8D0F12091B7C000E22D98 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		C5C8D0F42091B7ED00E22D98 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		C5C8D0F62091B7F600E22D98 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C5C8D0F72091B7F600E22D98 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		C5C8D0FB2091B83200E22D98 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		C5C8D0FD2091B83900E22D98 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/Frameworks/IOSurface.framework; sourceTree = SDKROOT; };
 		C5D855CA206C94CC00BDE087 /* cef_render_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cef_render_handler.h; sourceTree = "<group>"; };
 		C5D855CB206C94CC00BDE087 /* cef_pack_strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cef_pack_strings.h; sourceTree = "<group>"; };
 		C5D855CC206C94CC00BDE087 /* cef_response_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cef_response_filter.h; sourceTree = "<group>"; };
@@ -419,11 +438,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5D85762206C94CD00BDE087 /* libcef.lib in Frameworks */,
-				C5D85760206C94CD00BDE087 /* libcef.lib in Frameworks */,
+				C5C8D0FE2091B83900E22D98 /* IOSurface.framework in Frameworks */,
+				C5C8D0FC2091B83200E22D98 /* IOKit.framework in Frameworks */,
+				C5C8D0FA2091B81500E22D98 /* CoreAudio.framework in Frameworks */,
+				C5C8D0F82091B7F600E22D98 /* AudioToolbox.framework in Frameworks */,
+				C5C8D0F92091B7F600E22D98 /* AudioUnit.framework in Frameworks */,
+				C5C8D0F52091B7ED00E22D98 /* Accelerate.framework in Frameworks */,
+				C5C8D0F32091B7E600E22D98 /* CoreVideo.framework in Frameworks */,
+				C5C8D0EE2091B79000E22D98 /* CoreMedia.framework in Frameworks */,
+				C5C8D0EC2091B78A00E22D98 /* Cocoa.framework in Frameworks */,
+				C5C8D0EA2091B76400E22D98 /* AVFoundation.framework in Frameworks */,
+				C5C8D0E82091B75300E22D98 /* OpenGL.framework in Frameworks */,
 				C5D85763206C94CD00BDE087 /* Chromium Embedded Framework.framework in Frameworks */,
-				C5D85761206C94CD00BDE087 /* libcef_dll_wrapper.lib in Frameworks */,
-				C5D8575F206C94CD00BDE087 /* libcef_dll_wrapper.lib in Frameworks */,
 				C5D85764206C94CD00BDE087 /* libcef_dll_wrapper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +471,25 @@
 				C5D855C0206C94CC00BDE087 /* src */,
 			);
 			name = addons;
+			sourceTree = "<group>";
+		};
+		C5C8D0E02091B2F200E22D98 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5C8D0FD2091B83900E22D98 /* IOSurface.framework */,
+				C5C8D0FB2091B83200E22D98 /* IOKit.framework */,
+				C5C8D0F62091B7F600E22D98 /* AudioToolbox.framework */,
+				C5C8D0F72091B7F600E22D98 /* AudioUnit.framework */,
+				C5C8D0F42091B7ED00E22D98 /* Accelerate.framework */,
+				C5C8D0F12091B7C000E22D98 /* CoreAudio.framework */,
+				C5C8D0EF2091B7A800E22D98 /* CoreVideo.framework */,
+				C5C8D0ED2091B79000E22D98 /* CoreMedia.framework */,
+				C5C8D0EB2091B78A00E22D98 /* Cocoa.framework */,
+				C5C8D0E92091B76400E22D98 /* AVFoundation.framework */,
+				C5C8D0E72091B75300E22D98 /* OpenGL.framework */,
+				C5C8D0E12091B2F300E22D98 /* libcinder.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C5D855C0206C94CC00BDE087 /* src */ = {
@@ -1036,6 +1081,7 @@
 				BB4B014C10F69532006C3DED /* addons */,
 				6948EE371B920CB800B5AC1A /* local_addons */,
 				412C182E1F95F89200E2B940 /* cef_helper_mac.app */,
+				C5C8D0E02091B2F200E22D98 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1115,7 +1161,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					../../libs/cef/lib/osx,
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
@@ -1130,7 +1176,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				OTHER_LDFLAGS = "../../../blocks/coc-cef/libs/CEF/lib/osx/libcef_dll_wrapper.a";
+				OTHER_LDFLAGS = (
+					"../../../blocks/Cinder-CEF/libs/CEF/lib/osx/libcef_dll_wrapper.a",
+					../../../lib/macosx/Release/libcinder.a,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cc.openFrameworks.ofapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1151,7 +1200,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					../../libs/cef/lib/osx,
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
 				HEADER_SEARCH_PATHS = (
@@ -1165,7 +1214,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				OTHER_LDFLAGS = "../../../blocks/coc-cef/libs/CEF/lib/osx/libcef_dll_wrapper.a";
+				OTHER_LDFLAGS = (
+					"../../../blocks/Cinder-CEF/libs/CEF/lib/osx/libcef_dll_wrapper.a",
+					../../../lib/macosx/Release/libcinder.a,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cc.openFrameworks.ofapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
