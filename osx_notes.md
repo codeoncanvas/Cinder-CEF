@@ -30,11 +30,13 @@ xcodebuild -target libcef_dll_wrapper -configuration Release -project cef.xcodep
 
 4. Copy various files to blocks 'lib' folder (creating folders as needed)
 ```
-Release/Chromium Embedded Framework.framework -> Cinder-CEF/lib/osx
-libcef_dll_wrapper/Release/libcef_dll_wrapper.a ->  Cinder-CEF/lib/osx
+include/. -> Cinder-CEF/libs/cef/include/
+Release/Chromium Embedded Framework.framework -> Cinder-CEF/libs/cef/lib/osx
+libcef_dll_wrapper/Release/libcef_dll_wrapper.a ->  Cinder-CEF/libs/cef/lib/osx
 ```
 
 5. Build cef_helper_mac
+`cd into 'Cinder-CEF/libs/cef/`
 ```
 xcodebuild -target cef_helper_mac -configuration Release -project ../../cef_helper_mac/cef_helper_mac.xcodeproj/
 ```
