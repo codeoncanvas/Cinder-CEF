@@ -12,6 +12,7 @@ class CEFCinderSampleApp : public App {
 public:
     void setup() override;
     void mouseDown(MouseEvent event) override;
+	void keyDown(KeyEvent event) override;
     void update() override;
     void draw() override;
 
@@ -27,24 +28,30 @@ void CEFCinderSampleApp::setup() {
 
     mFont = Font("Arial", 18.0f);
 	CI_LOG_I("Info log test");
-   mWebViewWrapper.setup("https://bl.ocks.org/mbostock/2647924", getWindowSize());
+    //mWebViewWrapper.setup("http://www.cse.unsw.edu.au/~callumh/bbb/", getWindowSize());
+    mWebViewWrapper.setup("http://localhost:8000", getWindowSize());
    mWebViewWrapper.registerEvents();
 }
 
+void CEFCinderSampleApp::keyDown(KeyEvent event) {
+	mWebViewWrapper.executeJS("CallFromCinder('Hello from Cinder (key)')");
+	//mWebViewWrapper.executeJS("document.dispatchEvent(new Event('localStorageChanged'))");
+}
+
 void CEFCinderSampleApp::mouseDown(MouseEvent event) {
-	mWebViewWrapper.executeJS("callFromCinder()");
+	mWebViewWrapper.executeJS("CallFromCinder('Hello from Cinder (mouse)')");
 }
 
 void CEFCinderSampleApp::update() {
 
 	
-	/*if (!jsFunctionBinded && mWebViewWrapper.isReady()) {
+	if (!jsFunctionBinded && mWebViewWrapper.isReady()) {
 
 		CI_LOG_I("Ready to bind to JS");
 		mWebViewWrapper.bind(this, "DataToCinder", &CEFCinderSampleApp::gotMessageFromJS);
 		jsFunctionBinded = true;
 	
-	}*/
+	}
 
     mWebViewWrapper.update();
 }
@@ -87,7 +94,7 @@ void CEFCinderSampleApp::draw() {
 }
 
 void prepareSettings(App::Settings *settings) {
-	settings->setWindowSize(1920, 1080);
+	settings->setWindowSize(1280, 720);
 	settings->setConsoleWindowEnabled();
 	//settings->setFrameRate(120);
     char *argv[5] = {};
