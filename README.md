@@ -42,7 +42,7 @@ include/* -> Cinder-CEF/libs/cef/include/
 Release/libcef.lib -> Cinder-CEF/libs/cef/lib/vs/x64/Release/
 libcef_dll_wrapper/Release/libcef_dll_wrapper.lib -> Cinder-CEF/lib/vs/x64/Release/
 
-/Release/libcef.lib into Cinder-CEF/libs/cef/lib/vs/x64/Debug/
+/Release/libcef.lib -> Cinder-CEF/libs/cef/lib/vs/x64/Debug/
 libcef_dll_wrapper/Debug/libcef_dll_wrapper.lib -> Cinder-CEF/libs/cef/lib/vs/x64/Debug/
 
 Release/*  -> Cinder-CEF/libs/cef/export/vs/x64/
