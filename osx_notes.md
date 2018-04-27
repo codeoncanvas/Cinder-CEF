@@ -37,7 +37,7 @@ libcef_dll_wrapper/Release/libcef_dll_wrapper.a ->  Cinder-CEF/libs/cef/lib/osx
 
 5. Build cef_helper_mac
 
-`cd into 'Cinder-CEF/libs/cef/`
+`cd into Cinder-CEF/libs/cef/`
 ```
 xcodebuild -target cef_helper_mac -configuration Release -project ../../cef_helper_mac/cef_helper_mac.xcodeproj/
 ```
