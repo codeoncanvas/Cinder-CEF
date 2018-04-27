@@ -36,15 +36,17 @@ cmake -G "Visual Studio 14 2015 Win64" -DUSE_SANDBOX=Off
 ```
 
 4. Copy various files to blocks 'lib' folder (creating folders as needed)
+
 ```
-Release/libcef.lib -> Cinder-CEF/lib/vs/x64/Release/
+include/* -> Cinder-CEF/libs/cef/include/
+Release/libcef.lib -> Cinder-CEF/libs/cef/lib/vs/x64/Release/
 libcef_dll_wrapper/Release/libcef_dll_wrapper.lib -> Cinder-CEF/lib/vs/x64/Release/
 
-/Release/libcef.lib into Cinder-CEF/lib/vs/x64/Debug/
+/Release/libcef.lib into Cinder-CEF/libs/cef/lib/vs/x64/Debug/
 libcef_dll_wrapper/Debug/libcef_dll_wrapper.lib -> Cinder-CEF/lib/vs/x64/Debug/
 
-Release/*  -> Cinder-CEF/lib/export/vs/x64/
-Resources/* -> /export/vs/x64/
+Release/*  -> Cinder-CEF/libs/cef/export/vs/x64/
+Resources/* -> Cinder-CEF/libs/cef/export/vs/x64/
 
 Removing the following files from Cinder-CEF/lib/export/vs/x64/    
 - libcef.lib
