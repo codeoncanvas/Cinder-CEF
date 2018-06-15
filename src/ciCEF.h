@@ -18,6 +18,7 @@
 #include "ciCEFBrowserClient.h"
 #include "ciCEFRenderHandler.h"
 
+
 namespace coc {
     
     void initCiCEF(int argc, char **argv);
@@ -83,6 +84,11 @@ namespace coc {
             ci::app::KeyEvent::KEY_HOME, ci::app::KeyEvent::KEY_END,
             ci::app::KeyEvent::KEY_PAGEUP, ci::app::KeyEvent::KEY_PAGEDOWN,
             ci::app::KeyEvent::KEY_DELETE, ci::app::KeyEvent::KEY_BACKSPACE};
+
+    private:
+#if defined(CINDER_MAC)
+        void windowSetup(CefWindowInfo& windowInfo);
+#endif
 
     };
 

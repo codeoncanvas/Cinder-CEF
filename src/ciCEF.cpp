@@ -1,10 +1,6 @@
 //#include "cinder/Log.h"
 #include <stdexcept>
 
-#if defined(CINDER_MAC)
-#include <Cocoa/Cocoa.h>
-#endif
-
 #include <cef_app.h>
 #include "cinder/Log.h"
 #include "cinder/Timeline.h"
@@ -120,10 +116,7 @@ namespace coc {
         
 #if defined(CINDER_MAC)
         
-        NSView * view =  (NSView *) getWindow()->getNative();
-        NSWindow * cocoaWindow = [ view window ];
-        [cocoaWindow setReleasedWhenClosed:NO];
-        windowInfo.SetAsWindowless(view);
+        windowSetup(windowInfo);
         
 #elif defined(CINDER_MSW)
         
