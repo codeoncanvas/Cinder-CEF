@@ -54,7 +54,7 @@ If you change any of the following sources you have to rebuild the `cef_helper_m
 
 ## Adding CEF to a new Project
 
-Besides adding the block src files and linking the necessary framework and library (TinderBox coming soon!) - there are two additional manual steps needed to get CEF running on OS X
+Besides adding the block src files and linking the necessary framework and library (TinderBox coming soon!) - there is an additional manual step needed to get CEF running on macOS
 
 1. In the project settings go to Build Phases. There we need another `Run Script` build phase. Press the `+` then `New Run Script Phase`. In there goes:
 
@@ -65,5 +65,3 @@ Besides adding the block src files and linking the necessary framework and libra
 	mv "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/cef_helper_mac.app" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/$PRODUCT_NAME Helper.app"
 	mv "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/$PRODUCT_NAME Helper.app/Contents/MacOS/cef_helper_mac" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/$PRODUCT_NAME Helper.app/Contents/MacOS/$PRODUCT_NAME Helper"
 	```
-
-2. On the left in the source tree select each `.cpp` file in the block src and set the type in the file inspector to `Objective-C++ Source`.

@@ -12,45 +12,48 @@
     library="https://bitbucket.org/chromiumembedded/cef"
     >
 
-    <includePath>lib/cef</includePath>
-    <includePath>lib/cef/include</includePath>
-    <includePath system="true">lib/cef/include</includePath>
+    <includePath>libs/cef</includePath>
+    <includePath>libs/cef/include</includePath>
+    <includePath system="true">libs/cef/include</includePath>
 
-    <headerPattern>lib/cef/include/*.h</headerPattern>
-    <headerPattern>lib/cef/include/base/*.h</headerPattern>
-    <headerPattern>lib/cef/include/capi/*.h</headerPattern>
-    <headerPattern>lib/cef/include/capi/test/*.h</headerPattern>
-    <headerPattern>lib/cef/include/capi/views/*.h</headerPattern>
-    <headerPattern>lib/cef/include/internal/*.h</headerPattern>
-    <headerPattern>lib/cef/include/test/*.h</headerPattern>
-    <headerPattern>lib/cef/include/wrapper/*.h</headerPattern>
+    <headerPattern>libs/cef/include/*.h</headerPattern>
+    <headerPattern>libs/cef/include/base/*.h</headerPattern>
+    <headerPattern>libs/cef/include/capi/*.h</headerPattern>
+    <headerPattern>libs/cef/include/capi/test/*.h</headerPattern>
+    <headerPattern>libs/cef/include/capi/views/*.h</headerPattern>
+    <headerPattern>libs/cef/include/internal/*.h</headerPattern>
+    <headerPattern>libs/cef/include/test/*.h</headerPattern>
+    <headerPattern>libs/cef/include/wrapper/*.h</headerPattern>
 
     <platform os="msw">
         <!-- not implemented -->
     </platform>
 
     <platform os="macosx">
+        <!-- visit the following for extra manual steps on macOS:
+        https://github.com/codeoncanvas/Cinder-CEF/blob/master/osx_notes.md#adding-cef-to-a-new-project -->
 
-        <!--<header>src/cocCefWrapper.h</header>
-        <header>src/cocCefWrapper.cpp</header>
-        <header>src/browser_client.hpp</header>
-        <header>src/render_handler.hpp</header>
-        <header>src/process_helper_mac.cpp</header> --> <!-- added as a header to prevent adding it to build target -->
+        <header>src/ciCEF.h</header>
+        <header>src/ciCEFBrowserClient.h</header>
+        <header>src/ciCEFClientApp.h</header>
+        <header>src/ciCEFRenderHandler.h</header>
+        <header>src/ciCEFV8ExtensionHandler.h</header>
 
-        <!--
-        <platform config="debug">
-            <framework>lib/cef/Debug/Chromium Embedded Framework.framework</framework>
-            <staticLibrary>lib/cef/Debug/libcef_dll_wrapper.a</staticLibrary>
-        </platform>
-        -->
+        <source>src/ciCEF.mm</source>
 
-        <!--<frameworkPath>lib/cef/Release</frameworkPath>
-        <framework>lib/cef/Release/Chromium Embedded Framework.framework</framework>
-        <staticLibrary>lib/cef/Release/libcef_dll_wrapper.a</staticLibrary>
+        <source>src/ciCEF.cpp</source>
+        <source>src/ciCEFBrowserClient.cpp</source>
+        <source>src/ciCEFClientApp.h</source>
+        <source>src/ciCEFRenderHandler.h</source>
+        <source>src/ciCEFV8ExtensionHandler.h</source>
 
-        <buildCopy destination="frameworks">lib/cef/Release/Chromium Embedded Framework.framework</buildCopy>
-        <setting name="LD_RUNPATH_SEARCH_PATHS">$(inherited) @executable_path/../Frameworks</setting>-->
+        <framework>libs/cef/lib/osx/Chromium Embedded Framework.framework</framework>
+        <staticLibrary>libs/cef/lib/osx/libcef_dll_wrapper.a</staticLibrary>
 
+        <frameworkPath>libs/cef/lib/osx</frameworkPath>
+
+        <buildCopy destination="frameworks">libs/cef/lib/osx/Chromium Embedded Framework.framework</buildCopy>
+        <setting name="LD_RUNPATH_SEARCH_PATHS">$(inherited) @executable_path/../Frameworks</setting>
 
     </platform>
 
