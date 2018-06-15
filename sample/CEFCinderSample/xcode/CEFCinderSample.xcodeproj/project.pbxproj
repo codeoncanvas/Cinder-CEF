@@ -10,6 +10,7 @@
 		0AC5561FC3364E448A60C741 /* CEFCinderSampleApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25D86ED7437A4C1D91CBDB4B /* CEFCinderSampleApp.cpp */; };
 		6B7ECBE62092F0E70089D74B /* Chromium Embedded Framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7ECBE32092F0E70089D74B /* Chromium Embedded Framework.framework */; };
 		6B7ECBE72092F0E70089D74B /* cef_helper_mac.app in Resources */ = {isa = PBXBuildFile; fileRef = 6B7ECBE42092F0E70089D74B /* cef_helper_mac.app */; };
+		900EE2F020D38DCC00A12B75 /* ciCEF.mm in Sources */ = {isa = PBXBuildFile; fileRef = 900EE2EF20D38DCC00A12B75 /* ciCEF.mm */; };
 		905E5A49203FEDE700D91CBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905E5A48203FEDE700D91CBC /* Cocoa.framework */; };
 		905E5A4A203FEDF400D91CBC /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
 		905E5A4B203FEDFE00D91CBC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
@@ -21,7 +22,6 @@
 		905E5A53203FEE3500D91CBC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905E5A52203FEE3500D91CBC /* OpenGL.framework */; };
 		905E5A54203FEE4C00D91CBC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720319952D00008149E2 /* CoreMedia.framework */; };
 		905E5A55203FEE5600D91CBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006D720219952D00008149E2 /* AVFoundation.framework */; };
-		C556A1C32092BC9E00F4740C /* Chromium Embedded Framework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C556A1C22092BC9E00F4740C /* Chromium Embedded Framework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C57BB6E0205B7A13004C0212 /* ciCEF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C57BB6DE205B7A13004C0212 /* ciCEF.cpp */; };
 		C5A61C25205F5C8900DED73D /* ciCEFBrowserClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5A61C23205F5C8900DED73D /* ciCEFBrowserClient.cpp */; };
 /* End PBXBuildFile section */
@@ -33,7 +33,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C556A1C32092BC9E00F4740C /* Chromium Embedded Framework.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,16 +305,15 @@
 		6B7ECBE52092F0E70089D74B /* libcef_dll_wrapper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcef_dll_wrapper.a; sourceTree = "<group>"; };
 		70501EADBF1A4D85B370A420 /* CEFCinderSample_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = CEFCinderSample_Prefix.pch; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CEFCinderSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CEFCinderSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		900EE2EF20D38DCC00A12B75 /* ciCEF.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ciCEF.mm; path = ../../../src/ciCEF.mm; sourceTree = "<group>"; };
 		905E5A48203FEDE700D91CBC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		905E5A50203FEE2C00D91CBC /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		905E5A52203FEE3500D91CBC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		907B13AB20365A7D003101DE /* CEFCinderSample copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CEFCinderSample copy-Info.plist"; path = "/Users/callumhoward/Documents/CinderApps/coc/cef/CEFCinderSample/xcode/CEFCinderSample copy-Info.plist"; sourceTree = "<absolute>"; };
-		C556A1C22092BC9E00F4740C /* Chromium Embedded Framework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Chromium Embedded Framework.framework"; path = "../../../libs/cef/lib/osx/Chromium Embedded Framework.framework"; sourceTree = "<group>"; };
 		C57BB6DE205B7A13004C0212 /* ciCEF.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = ciCEF.cpp; path = ../../../src/ciCEF.cpp; sourceTree = "<group>"; };
 		C57BB6DF205B7A13004C0212 /* ciCEF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ciCEF.h; path = ../../../src/ciCEF.h; sourceTree = "<group>"; };
 		C5A61C23205F5C8900DED73D /* ciCEFBrowserClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ciCEFBrowserClient.cpp; path = ../../../src/ciCEFBrowserClient.cpp; sourceTree = "<group>"; };
 		C5A61C24205F5C8900DED73D /* ciCEFBrowserClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ciCEFBrowserClient.h; path = ../../../src/ciCEFBrowserClient.h; sourceTree = "<group>"; };
-		C5A61C26205F5CD500DED73D /* ciCEFRenderHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ciCEFRenderHandler.h; path = ../../../src/ciCEFRenderHandler.h; sourceTree = "<group>"; };
 		D84CF1BDB0E14CE9B9CEB24B /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -396,7 +394,6 @@
 		29B97314FDCFA39411CA2CEA /* CEFCinderSample */ = {
 			isa = PBXGroup;
 			children = (
-				C556A1C22092BC9E00F4740C /* Chromium Embedded Framework.framework */,
 				01B97315FEAEA392516A2CEA /* Blocks */,
 				29B97315FDCFA39411CA2CEA /* Headers */,
 				080E96DDFE201D6D7F000001 /* Source */,
@@ -810,7 +807,7 @@
 		C57BB6C8205B706F004C0212 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				C5A61C26205F5CD500DED73D /* ciCEFRenderHandler.h */,
+				900EE2EF20D38DCC00A12B75 /* ciCEF.mm */,
 				C5A61C23205F5C8900DED73D /* ciCEFBrowserClient.cpp */,
 				C5A61C24205F5C8900DED73D /* ciCEFBrowserClient.h */,
 				C57BB6DE205B7A13004C0212 /* ciCEF.cpp */,
@@ -903,6 +900,7 @@
 			files = (
 				C5A61C25205F5C8900DED73D /* ciCEFBrowserClient.cpp in Sources */,
 				C57BB6E0205B7A13004C0212 /* ciCEF.cpp in Sources */,
+				900EE2F020D38DCC00A12B75 /* ciCEF.mm in Sources */,
 				0AC5561FC3364E448A60C741 /* CEFCinderSampleApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
