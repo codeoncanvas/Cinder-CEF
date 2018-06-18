@@ -16,36 +16,73 @@
     <includePath>libs/cef/include</includePath>
     <includePath system="true">libs/cef/include</includePath>
 
-    <headerPattern>libs/cef/include/*.h</headerPattern>
-    <headerPattern>libs/cef/include/base/*.h</headerPattern>
-    <headerPattern>libs/cef/include/capi/*.h</headerPattern>
-    <headerPattern>libs/cef/include/capi/test/*.h</headerPattern>
-    <headerPattern>libs/cef/include/capi/views/*.h</headerPattern>
-    <headerPattern>libs/cef/include/internal/*.h</headerPattern>
-    <headerPattern>libs/cef/include/test/*.h</headerPattern>
-    <headerPattern>libs/cef/include/wrapper/*.h</headerPattern>
+    <header>src/ciCEF.h</header>
+    <header>src/ciCEFBrowserClient.h</header>
+    <header>src/ciCEFClientApp.h</header>
+    <header>src/ciCEFRenderHandler.h</header>
+    <header>src/ciCEFV8ExtensionHandler.h</header>
+
+    <source>src/ciCEF.cpp</source>
+    <source>src/ciCEFBrowserClient.cpp</source>
+    <!-- <source>src/ciCEFRenderHandler.cpp</source> -->
 
     <platform os="msw">
-        <!-- not implemented -->
+        <includePath>libs/cef/include/base</includePath>
+        <includePath>src</includePath>
+
+        <header>src/cefListV8Converter.hpp</header>
+
+        <source>src/cefListV8Converter.cpp</source>
+        <source>src/ciCEFClientApp.cpp</source>
+        <source>src/ciCEFV8ExtensionHandler.cpp</source>
+
+        <platform config="release">
+            <staticLibrary>libs/cef/lib/vs/x64/Release/libcef.lib</staticLibrary>
+            <staticLibrary>libs/cef/lib/vs/x64/Release/libcef_dll_wrapper.lib</staticLibrary>
+        </platform>
+
+        <platform config="debug">
+            <staticLibrary>libs/cef/lib/vs/x64/Debug/libcef.lib</staticLibrary>
+            <staticLibrary>libs/cef/lib/vs/x64/Debug/libcef_dll_wrapper.lib</staticLibrary>
+        </platform>
+
+        <buildCopy>libs/cef/export/vs/x64/</buildCopy>
+
+        <buildCopy>libs/cef/export/vs/x64/cef.pak</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/cef_100_percent.pak</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/cef_200_percent.pak</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/cef_extensions.pak</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/chrome_elf.dll</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/d3dcompiler_43.dll</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/d3dcompiler_47.dll</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/devtools_resources.pak</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/icudtl.dat</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/libcef.dll</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/libEGL.dll</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/libGLESv2.dll</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/natives_blob.bin</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/snapshot_blob.bin</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/v8_context_snapshot.bin</buildCopy>
+
+        <buildCopy>libs/cef/export/vs/x64/swiftshader</buildCopy>
+        <buildCopy>libs/cef/export/vs/x64/locales</buildCopy>
     </platform>
 
     <platform os="macosx">
+        <headerPattern>libs/cef/include/*.h</headerPattern>
+        <headerPattern>libs/cef/include/base/*.h</headerPattern>
+        <headerPattern>libs/cef/include/capi/*.h</headerPattern>
+        <headerPattern>libs/cef/include/capi/test/*.h</headerPattern>
+        <headerPattern>libs/cef/include/capi/views/*.h</headerPattern>
+        <headerPattern>libs/cef/include/internal/*.h</headerPattern>
+        <headerPattern>libs/cef/include/test/*.h</headerPattern>
+        <headerPattern>libs/cef/include/wrapper/*.h</headerPattern>
+
         <!-- visit the following for extra manual steps on macOS:
         https://github.com/codeoncanvas/Cinder-CEF/blob/master/osx_notes.md#adding-cef-to-a-new-project -->
 
-        <header>src/ciCEF.h</header>
-        <header>src/ciCEFBrowserClient.h</header>
-        <header>src/ciCEFClientApp.h</header>
-        <header>src/ciCEFRenderHandler.h</header>
-        <header>src/ciCEFV8ExtensionHandler.h</header>
-
+        <!--
         <source>src/ciCEF.mm</source>
-
-        <source>src/ciCEF.cpp</source>
-        <source>src/ciCEFBrowserClient.cpp</source>
-        <source>src/ciCEFClientApp.h</source>
-        <source>src/ciCEFRenderHandler.h</source>
-        <source>src/ciCEFV8ExtensionHandler.h</source>
 
         <framework>libs/cef/lib/osx/Chromium Embedded Framework.framework</framework>
         <staticLibrary>libs/cef/lib/osx/libcef_dll_wrapper.a</staticLibrary>
@@ -54,6 +91,8 @@
 
         <buildCopy destination="frameworks">libs/cef/lib/osx/Chromium Embedded Framework.framework</buildCopy>
         <setting name="LD_RUNPATH_SEARCH_PATHS">$(inherited) @executable_path/../Frameworks</setting>
+
+        -->
 
     </platform>
 
