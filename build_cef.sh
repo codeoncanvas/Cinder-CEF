@@ -28,8 +28,8 @@ mv "cef/include" "libs/cef/"
 mv "cef/Release/Chromium Embedded Framework.framework" "libs/cef/lib/osx/"
 mv "cef/libcef_dll_wrapper/Release/libcef_dll_wrapper.a" "libs/cef/lib/osx/"
 
-# Build cef_helper_mac
+echo "Building cef_helper_mac..."
 cd libs/cef/
 xcodebuild -target cef_helper_mac -configuration Release -project ../../cef_helper_mac/cef_helper_mac.xcodeproj/
-if [ $? != 0 ]; then echo "Error unpacking CEF binary release."; exit 1; fi
+if [ $? != 0 ]; then echo "Error building cef_helper_mac."; exit 1; fi
 echo "Done!"
