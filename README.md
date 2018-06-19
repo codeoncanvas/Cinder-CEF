@@ -21,6 +21,21 @@ For proprietary video codecs (Windows) it is necessary to build CEF from source 
 This script will handle downloading and building CEF, and placing items in the correct folders. One it has successfully completed, the provided sample project should work.
 For building manually, see the script source, or check the instructions in this repository for [mac](osx_notes.md) and [Windows](win_notes.md).
 
+## Adding CEF to a new Project
+
+To create a new project with Cinder-CEF, simply use TinderBox.
+On macOS there is an additional manual step needed.
+
+1. In the project settings go to Build Phases. There we need another `Run Script` build phase. Press the `+` then `New Run Script Phase`. In there goes:
+
+	```
+	install_name_tool -change "@rpath/Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}"
+	rsync -aved "$CINDER_PATH/blocks/Cinder-CEF/libs/cef/lib/osx/cef_helper_mac.app" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/"
+	rm -rf "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/$PRODUCT_NAME Helper.app"
+	mv "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/cef_helper_mac.app" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/$PRODUCT_NAME Helper.app"
+	mv "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/$PRODUCT_NAME Helper.app/Contents/MacOS/cef_helper_mac" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/$PRODUCT_NAME Helper.app/Contents/MacOS/$PRODUCT_NAME Helper"
+	```
+
 ## Multi-threaded Message Loop
 
 Cinder-CEF is currently setup to run in a single-threaded mode. While some performance benefit may be possible using CEF's multi-threaded-message-loop option, there appears to be some clash with Cinder's message handling that causes CEF to hang until mouse events are received. Efforts continue on a (currently broken) branch [here](https://github.com/codeoncanvas/Cinder-CEF/tree/multithreaded)
