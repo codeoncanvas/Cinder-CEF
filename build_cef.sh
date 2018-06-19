@@ -68,7 +68,7 @@ if [ $? != 0 ]; then echo "Error preparing build files with cmake."; exit 1; fi
 # Compile
 echo "Building CEF...(compiling)"
 if [[ "$platform" == 'mac' ]]; then
-    xcodebuild -target libcef_dll_wrapper -configuration Release -project cef.xcodeproj/
+    xcodebuild -quiet -target libcef_dll_wrapper -configuration Release -project cef.xcodeproj/
 
 elif [[ "$platform" == 'win' ]]; then
     'C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe' -m -nologo -verbosity:quiet -target:libcef_dll_wrapper -p:"Configuration=Release;Platform=x64" cef.sln
@@ -87,7 +87,7 @@ if [[ "$platform" == 'mac' ]]; then
     mv "cef/libcef_dll_wrapper/Release/libcef_dll_wrapper.a" "libs/cef/lib/osx/"
     echo "Building cef_helper_mac..."
     cd libs/cef/
-    xcodebuild -target cef_helper_mac -configuration Release -project ../../cef_helper_mac/cef_helper_mac.xcodeproj/
+    xcodebuild -quiet -target cef_helper_mac -configuration Release -project ../../cef_helper_mac/cef_helper_mac.xcodeproj/
     if [ $? != 0 ]; then echo "Error building cef_helper_mac."; exit 1; fi
 
 elif [[ "$platform" == 'win' ]]; then
