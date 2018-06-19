@@ -1,76 +1,77 @@
 #!/bin/bash
 
+# Set CEF Version
+BIN_SOURCE="http://opensource.spotify.com/cefbuilds/"
+CEF_VERSION="3.3282.1734.g8f26fe0"
+
 # Enable bash strict mode
 set -uo pipefail
 IFS=$'\n\t'
 
 # Detect OS
-platform='unknown'
-unamestr=`uname`
-if [[ "$unamestr" == 'Darwin' ]]; then platform='mac'
-elif [[ "$unamestr" =~ ^MINGW ]]; then platform='win'
-elif [[ "$unamestr" == 'Linux' ]]; then platform='linux'
+PLATFORM='unknown'
+UNAMESTR=`uname`
+if [[ "$UNAMESTR" == 'Darwin' ]]; then PLATFORM='mac'
+elif [[ "$UNAMESTR" =~ ^MINGW ]]; then PLATFORM='win'
+elif [[ "$UNAMESTR" == 'Linux' ]]; then PLATFORM='linux'
 fi
 
-if [[ "$platform" == 'linux' ]]; then
-    echo "Linux platform not supported"
+if [[ "$PLATFORM" == 'linux' ]]; then
+    echo "Linux PLATFORM not supported"
     exit 1
 
-elif [[ "$platform" == 'unknown' ]]; then
+elif [[ "$PLATFORM" == 'unknown' ]]; then
     echo "Please run this script with Terminal on Mac, or Git Bash/MINGW terminal on Windows"
     exit 1
 fi
 
-# Set CEF Version
-BIN_SOURCE="http://opensource.spotify.com/cefbuilds/"
+if [[ "$PLATFORM" == 'mac' ]]; then
+  CEF_FILENAME="cef_binary_"$CEF_VERSION"_macosx64_minimal"
 
-if [[ "$platform" == 'mac' ]]; then
-  CEF_VERSION="cef_binary_3.3282.1734.g8f26fe0_macosx64_minimal"
-
-elif [[ "$platform" == 'win' ]]; then
-  CEF_VERSION="cef_binary_3.3282.1734.g8f26fe0_windows64_minimal"
+elif [[ "$PLATFORM" == 'win' ]]; then
+  CEF_FILENAME="cef_binary_"$CEF_VERSION"_windows64_minimal"
 fi
 
 # Get CEF binary release
 DOWNLOAD_CEF=1
 
-if [[ -e "$CEF_VERSION.tar.bz2" ]]; then
-    echo "Found $CEF_VERSION.tar.bz2 in the current directory"
+if [[ -e "$CEF_FILENAME.tar.bz2" ]]; then
+    echo "Found $CEF_FILENAME.tar.bz2 in the current directory"
     read -p "Use this file? [y]/n: " -n 1 -r
     if [[ ! $REPLY =~ ^[Nn]$ ]]; then DOWNLOAD_CEF=0; fi
 fi
 
 if [ $DOWNLOAD_CEF == 1 ]; then
     echo "Downloading CEF binary release..."
-    echo "$BIN_SOURCE$CEF_VERSION.tar.bz2"
-    curl -O "$BIN_SOURCE$CEF_VERSION.tar.bz2"
+    echo "$BIN_SOURCE$CEF_FILENAME.tar.bz2"
+    curl -O "$BIN_SOURCE$CEF_FILENAME.tar.bz2"
     if [ $? != 0 ]; then echo "Error downloading CEF binary release."; exit 1; fi
 fi
 
 echo "Unpacking..."
-tar -xf "$CEF_VERSION.tar.bz2"
+tar -xf "$CEF_FILENAME.tar.bz2"
 if [ $? != 0 ]; then echo "Error unpacking CEF binary release."; exit 1; fi
 rm -rf cef
-mv "$CEF_VERSION" cef
+mv "$CEF_FILENAME" cef
 
 # Run cmake
 echo "Building CEF...(cmake)"
 cd cef
 
-if [[ "$platform" == 'mac' ]]; then
+if [[ "$PLATFORM" == 'mac' ]]; then
     cmake -G "Xcode"
 
-elif [[ "$platform" == 'win' ]]; then
+elif [[ "$PLATFORM" == 'win' ]]; then
     cmake -G "Visual Studio 14 2015 Win64" -DUSE_SANDBOX=Off
 fi
 if [ $? != 0 ]; then echo "Error preparing build files with cmake."; exit 1; fi
 
 # Compile
 echo "Building CEF...(compiling)"
-if [[ "$platform" == 'mac' ]]; then
+if [[ "$PLATFORM" == 'mac' ]]; then
     xcodebuild -quiet -target libcef_dll_wrapper -configuration Release -project cef.xcodeproj/
 
-elif [[ "$platform" == 'win' ]]; then
+elif [[ "$PLATFORM" == 'win' ]]; then
     'C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe' -m -nologo -verbosity:quiet -target:libcef_dll_wrapper -p:"Configuration=Release;Platform=x64" cef.sln
     'C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe' -m -nologo -verbosity:quiet -target:libcef_dll_wrapper -p:"Configuration=Debug;Platform=x64" cef.sln
 fi
@@ -80,7 +81,7 @@ if [ $? != 0 ]; then echo "Error building CEF."; exit 1; fi
 echo "Copying files to block lib folder..."
 mkdir -p "libs/cef/include"
 
-if [[ "$platform" == 'mac' ]]; then
+if [[ "$PLATFORM" == 'mac' ]]; then
     mkdir -p "libs/cef/lib/osx"
     mv "cef/include" "libs/cef/"
     mv "cef/Release/Chromium Embedded Framework.framework" "libs/cef/lib/osx/"
@@ -90,7 +91,7 @@ if [[ "$platform" == 'mac' ]]; then
     xcodebuild -quiet -target cef_helper_mac -configuration Release -project ../../cef_helper_mac/cef_helper_mac.xcodeproj/
     if [ $? != 0 ]; then echo "Error building cef_helper_mac."; exit 1; fi
 
-elif [[ "$platform" == 'win' ]]; then
+elif [[ "$PLATFORM" == 'win' ]]; then
     rm -rf libs/cef/include/*
     cp -r cef/include/* "libs/cef/include/"
 
@@ -111,7 +112,7 @@ elif [[ "$platform" == 'win' ]]; then
 fi
 
 #echo "Cleaning up..."
-#rm $CEF_VERSION.tar.bz2
+#rm $CEF_FILENAME.tar.bz2
 
 echo "Done!"
 
