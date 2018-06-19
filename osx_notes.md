@@ -15,9 +15,9 @@ curl -O "http://opensource.spotify.com/cefbuilds/cef_binary_3.3282.1734.g8f26fe0
 2. Unpack and clean up
 
 ```
-tar -xf cef_binary_3.3282.1734.g8f26fe0_windows64_minimal.tar.bz2
-mv cef_binary_3.3282.1734.g8f26fe0_windows64_minimal cef
-rm cef_binary_3.3282.1734.g8f26fe0_windows64_minimal.tar.bz2
+cef_binary_3.3282.1734.g8f26fe0_macosx64_minimal.tar.bz2
+mv cef_binary_3.3282.1734.g8f26fe0_macosx64_minimal cef
+rm cef_binary_3.3282.1734.g8f26fe0_macosx64_minimal.tar.bz2
 ```
 
 3. Build
