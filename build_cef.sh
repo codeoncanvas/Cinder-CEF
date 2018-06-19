@@ -37,7 +37,7 @@ DOWNLOAD_CEF=1
 if [[ -e "$CEF_VERSION.tar.bz2" ]]; then
     echo "Found $CEF_VERSION.tar.bz2 in the current directory"
     read -p "Use this file? [y]/n: " -n 1 -r
-	if [[ ! $REPLY =~ ^[Nn]$ ]]; then DOWNLOAD_CEF=0; fi
+    if [[ ! $REPLY =~ ^[Nn]$ ]]; then DOWNLOAD_CEF=0; fi
 fi
 
 if [ $DOWNLOAD_CEF == 1 ]; then
