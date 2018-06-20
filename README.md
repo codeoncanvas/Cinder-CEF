@@ -19,7 +19,7 @@ For proprietary video codecs (Windows) it is necessary to build CEF from source 
     ```
 
 This script will handle downloading and building CEF, and placing items in the correct folders. One it has successfully completed, the provided sample project should work.
-For building manually, see the script source, or check the instructions in this repository for [mac](osx_notes.md) and [Windows](win_notes.md).
+For building manually, see the script source, or check the instructions in this repository for [Mac](osx_notes.md) and [Windows](win_notes.md).
 
 ## Adding CEF to a new Project
 
